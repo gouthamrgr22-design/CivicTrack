@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CivicTrack - Report civic issues and improve your community."
+    >
+
+    <title>CivicTrack | Public Service Portal</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script src="/static/js/app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <a href="#home" class="brand">
+            <span class="brand-icon">C</span>
+
+            <span class="brand-text">
+                CivicTrack
+                <small>PUBLIC SERVICE PORTAL</small>
+            </span>
+        </a>
+
+        <nav class="navigation">
+            <a href="#home">Home</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#report">Report Issue</a>
+            <a href="#complaints">Complaints</a>
+            <a href="/templates/login.html">Login</a>
+        </nav>
+
+        <a href="#report" class="nav-button">
+            Get Started
+        </a>
+
+    </header>
+
+
+    <main id="home" class="container">
+
+        <!-- HERO SECTION -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="eyebrow">
+                    BUILDING BETTER COMMUNITIES
+                </span>
+
+                <h1>
+                    Your city.<br>
+                    Your voice.<br>
+                    <span>Your impact.</span>
+                </h1>
+
+                <p>
+                    Help improve your neighbourhood by reporting
+                    civic issues. Track complaints and bring
+                    attention to the problems that matter.
+                </p>
+
+                <a href="#report" class="primary-button">
+                    Report an Issue
+                    <span aria-hidden="true">→</span>
+                </a>
+
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="visual-circle">
+                    <span>⌂</span>
+                </div>
+
+                <div class="visual-label">
+                    <span>COMMUNITY FIRST</span>
+                    <strong>TOGETHER WE IMPROVE</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- DASHBOARD STATISTICS -->
+
+        <section id="dashboard" class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">LIVE OVERVIEW</span>
+                    <h2>Community Dashboard</h2>
+                </div>
+
+                <span class="demo-label">DEMO DATA</span>
+
+            </div>
+
+
+            <div class="statistics">
+
+                <article class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Total Complaints</span>
+                        <span class="stat-icon blue">▤</span>
+                    </div>
+
+                    <strong id="total-count">0</strong>
+
+                    <small>All submitted reports</small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Pending</span>
+                        <span class="stat-icon orange">◷</span>
+                    </div>
+
+                    <strong id="pending-count">0</strong>
+
+                    <small>Awaiting action</small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Resolved</span>
+                        <span class="stat-icon green">✓</span>
+                    </div>
+
+                    <strong id="resolved-count">0</strong>
+
+                    <small>Issues addressed</small>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- REPORT ISSUE SECTION -->
+
+        <section id="report" class="content-grid">
+
+            <article class="panel report-panel">
+
+                <span class="eyebrow">MAKE YOUR VOICE HEARD</span>
+
+                <h2>Report a Civic Issue</h2>
+
+                <p class="muted">
+                    Provide the details below to report a
+                    problem in your neighbourhood.
+                </p>
+
+
+                <form id="complaint-form">
+
+                    <div class="form-group">
+
+                        <label for="title">
+                            Issue Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Example: Pothole near main road"
+                            maxlength="80"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Issue Category
+                        </label>
+
+                        <select
+                            id="category"
+                            name="category"
+                            required
+                        >
+                            <option value="">Select a category</option>
+                            <option value="Road Damage">Road Damage</option>
+                            <option value="Streetlight">Streetlight</option>
+                            <option value="Water Leakage">Water Leakage</option>
+                            <option value="Drainage">Drainage</option>
+                            <option value="Garbage">Garbage Collection</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Street, area or landmark"
+                            maxlength="120"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="4"
+                            maxlength="1000"
+                            placeholder="Explain the issue..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button type="submit" class="submit-button">
+                        Submit Complaint
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <p
+                        id="form-message"
+                        class="form-message"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                </form>
+
+            </article>
+
+
+            <!-- HOW IT WORKS -->
+
+            <aside class="panel process-panel">
+
+                <span class="eyebrow">OUR PROCESS</span>
+
+                <h2>How CivicTrack Works</h2>
+
+                <p class="muted">
+                    Making civic participation simple and transparent.
+                </p>
+
+
+                <div class="process-step">
+
+                    <span class="step-number">01</span>
+
+                    <div>
+                        <strong>Report an Issue</strong>
+                        <p>
+                            Citizens submit the details of a local
+                            problem.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="process-step">
+
+                    <span class="step-number">02</span>
+
+                    <div>
+                        <strong>Review and Assignment</strong>
+                        <p>
+                            The relevant authority reviews
+                            the reported problem.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="process-step">
+
+                    <span class="step-number">03</span>
+
+                    <div>
+                        <strong>Track Progress</strong>
+                        <p>
+                            Citizens follow the complaint status.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="notice">
+
+                    <strong>Prototype Information</strong>
+
+                    <p>
+                        This is the first CivicTrack prototype.
+                        Reports are stored in your browser and
+                        are not sent to any government authority.
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- COMPLAINT TABLE -->
+
+        <section id="complaints" class="panel complaints-panel">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">TRANSPARENCY</span>
+                    <h2>Recent Complaints</h2>
+                </div>
+
+
+                <select
+                    id="status-filter"
+                    class="filter-select"
+                    aria-label="Filter complaints by status"
+                >
+                    <option value="All">All Complaints</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>REFERENCE</th>
+                            <th>ISSUE</th>
+                            <th>CATEGORY</th>
+                            <th>LOCATION</th>
+                            <th>STATUS</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="complaint-list">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div>
+            <strong>CivicTrack</strong>
+            <p>Building better communities together.</p>
+        </div>
+
+        <span>Version v1 · Frontend prototype</span>
+
+    </footer>
+
+</body>
+</html>
+

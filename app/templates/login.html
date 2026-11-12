@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Sign in to CivicTrack."
+    >
+
+    <title>Sign In | CivicTrack</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/auth.css">
+
+    <script src="/static/js/auth.js" defer></script>
+</head>
+
+<body class="auth-page">
+
+    <header class="auth-header">
+
+        <a href="/" class="brand">
+
+            <span class="brand-icon">C</span>
+
+            <span class="brand-text">
+                CivicTrack
+                <small>PUBLIC SERVICE PORTAL</small>
+            </span>
+
+        </a>
+
+        <a href="/" class="back-home">
+            ← Back to homepage
+        </a>
+
+    </header>
+
+
+    <main class="auth-layout">
+
+        <section class="auth-intro">
+
+            <span class="eyebrow">
+                COMMUNITY FIRST
+            </span>
+
+            <h1>
+                Your community.<br>
+                Your voice.<br>
+                Your impact.
+            </h1>
+
+            <p>
+                Sign in to access your CivicTrack account,
+                report local issues and follow complaint
+                progress.
+            </p>
+
+            <div class="auth-decoration" aria-hidden="true">
+                <span>⌂</span>
+            </div>
+
+            <div class="auth-intro-footer">
+                BUILDING BETTER COMMUNITIES TOGETHER
+            </div>
+
+        </section>
+
+
+        <section class="auth-card">
+
+            <div class="auth-card-heading">
+
+                <span class="eyebrow">
+                    WELCOME BACK
+                </span>
+
+                <h2>Sign in to CivicTrack</h2>
+
+                <p>
+                    Enter your account details to continue.
+                </p>
+
+            </div>
+
+
+            <form
+                id="login-form"
+                method="post"
+                action="/templates/login.html"
+            >
+
+                <div class="auth-field">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="toggle-password"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+                    Sign In
+                    <span aria-hidden="true">→</span>
+                </button>
+
+
+                <p
+                    id="login-message"
+                    class="auth-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+
+            <div class="auth-demo-note">
+
+                <strong>Prototype notice</strong>
+
+                <p>
+                    This is a demonstration login interface.
+                    Account authentication has not been
+                    implemented yet. No credentials are sent
+                    or stored.
+                </p>
+
+            </div>
+
+
+            <a class="public-link" href="/">
+                Continue to public homepage
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer class="auth-footer">
+
+        <span>© 2026 CivicTrack</span>
+
+        <span>Public Service Portal · Version v1</span>
+      
+
+    </footer>
+
+</body>
+
+</html>
+

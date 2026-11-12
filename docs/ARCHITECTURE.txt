@@ -1,0 +1,106 @@
+
+CIVICTRACK ARCHITECTURE
+======================
+
+VERSION
+-------
+
+v1 - First frontend prototype
+
+
+1. APPLICATION STRUCTURE
+------------------------
+
+app/main.py
+    Starts the local Python HTTP server.
+
+app/templates/index.html
+    Contains the website's HTML structure.
+
+app/static/css/style.css
+    Controls website appearance and responsive layout.
+
+app/static/js/app.js
+    Controls frontend interactions and complaint data.
+
+
+2. REQUEST FLOW
+---------------
+
+Browser
+    |
+    v
+Python HTTP Server
+    |
+    v
+index.html
+    |
+    +------> style.css
+    |
+    +------> app.js
+                 |
+                 v
+             localStorage
+
+
+3. COMPLAINT SUBMISSION
+----------------------
+
+1. Citizen fills in the HTML form.
+2. JavaScript reads the submitted values.
+3. JavaScript creates a complaint object.
+4. Complaint is added to application state.
+5. Browser localStorage saves the data.
+6. Dashboard updates its statistics.
+7. Complaint table displays the new record.
+
+
+4. CURRENT DATA STORAGE
+-----------------------
+
+Data is stored using browser localStorage.
+
+The current prototype does not use SQLite.
+
+Data is local to the browser and its origin.
+
+
+5. FUTURE BACKEND ARCHITECTURE
+------------------------------
+
+Browser
+    |
+    v
+FastAPI
+    |
+    v
+Routes
+    |
+    v
+Services
+    |
+    v
+Models
+    |
+    v
+SQLite Database
+
+
+6. FUTURE MODULES
+-----------------
+
+Authentication:
+    Citizen and administrator accounts.
+
+Complaint management:
+    Complaint creation and tracking.
+
+Department management:
+    Department assignment and workflow.
+
+Administration:
+    Complaint review and status updates.
+
+Testing:
+    Automated backend and frontend verification.
+

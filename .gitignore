@@ -1,0 +1,30 @@
+
+# Python generated files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Allow example configuration
+!.env.example
+
+# Local databases
+*.db
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Uploaded files
+uploads/
+
+# Editor and operating system files
+.DS_Store
+
