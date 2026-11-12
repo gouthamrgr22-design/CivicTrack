@@ -1,0 +1,410 @@
+
+/* ==========================================
+   CIVICTRACK — SHARED DARK THEME
+   ========================================== */
+
+:root {
+    color-scheme: dark;
+
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --cyan: #22d3ee;
+
+    --background: #080f1d;
+    --surface: #111d30;
+    --surface-alt: #16243a;
+    --surface-hover: #1c2d47;
+
+    --border: #263750;
+
+    --text: #eaf2ff;
+    --muted: #9aacbf;
+
+    --success: #34d399;
+    --warning: #fbbf24;
+    --danger: #fb7185;
+}
+
+/* GLOBAL */
+
+* {
+    scrollbar-color: #405572 #080f1d;
+}
+
+html {
+    background: var(--background);
+    color-scheme: dark;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+::selection {
+    background: #2563eb;
+    color: white;
+}
+
+/* NAVIGATION */
+
+.navbar,
+.auth-header {
+    background: var(--background);
+    border-color: var(--border);
+}
+
+.brand {
+    color: var(--text);
+}
+
+.brand-text small {
+    color: var(--muted);
+}
+
+.navigation a,
+.back-home {
+    color: #b7c6da;
+}
+
+.navigation a:hover,
+.back-home:hover {
+    color: var(--cyan);
+}
+
+/* BUTTONS */
+
+.nav-button,
+.submit-button,
+.auth-submit {
+    background: var(--primary);
+    color: white;
+}
+
+.nav-button:hover,
+.submit-button:hover,
+.auth-submit:hover {
+    background: var(--primary-dark);
+}
+
+.primary-button {
+    background: #1c3556;
+    color: #eaf2ff;
+    border: 1px solid #34577f;
+}
+
+.primary-button:hover {
+    background: #264a76;
+}
+
+/* HERO */
+
+.hero {
+    background: linear-gradient(
+        115deg,
+        #0b1d36,
+        #123e70
+    );
+    border: 1px solid #24466d;
+}
+
+.hero p {
+    color: #c6d9f0;
+}
+
+.hero h1 span {
+    color: var(--cyan);
+}
+
+.visual-circle {
+    background: #122d4b;
+    border-color: #44688f;
+}
+
+.visual-label {
+    background: #16243a;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+/* HEADINGS */
+
+.section-heading h2,
+.panel h2,
+.auth-card-heading h2 {
+    color: var(--text);
+}
+
+.eyebrow {
+    color: #83a9dc;
+}
+
+.demo-label {
+    background: #142d4d;
+    color: var(--cyan);
+    border: 1px solid #24466d;
+}
+
+/* DASHBOARD CARDS */
+
+.stat-card,
+.panel,
+.auth-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px #00000018;
+}
+
+.stat-top,
+.stat-card p,
+.muted {
+    color: var(--muted);
+}
+
+.stat-card > strong {
+    color: var(--text);
+}
+
+.stat-icon.blue {
+    background: #172f50;
+    color: #60a5fa;
+}
+
+.stat-icon.orange {
+    background: #392d17;
+    color: var(--warning);
+}
+
+.stat-icon.green {
+    background: #143629;
+    color: var(--success);
+}
+
+.stat-card small {
+    color: #a2b2c7;
+}
+
+/* FORMS */
+
+.form-group label,
+.auth-field label {
+    color: #dce8f8;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.filter-select,
+.auth-field input {
+    background: #0b1627;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus,
+.filter-select:focus,
+.auth-field input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px #3b82f622;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #71849e;
+}
+
+option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+.form-message {
+    color: var(--success);
+}
+
+/* PROCESS PANEL */
+
+.process-step strong {
+    color: var(--text);
+}
+
+.process-step p {
+    color: var(--muted);
+}
+
+.step-number {
+    background: #172f50;
+    color: #60a5fa;
+}
+
+.notice,
+.auth-demo-note {
+    background: #192a40;
+    border: 1px solid #304561;
+}
+
+.notice strong,
+.auth-demo-note strong {
+    color: #c9e1ff;
+}
+
+.notice p,
+.auth-demo-note p {
+    color: #b3c4d9;
+}
+
+/* COMPLAINT TABLE */
+
+table {
+    color: var(--text);
+}
+
+th {
+    color: #a3b4ca;
+    border-color: var(--border);
+}
+
+td {
+    color: #c2d0e2;
+    border-color: var(--border);
+}
+
+td strong {
+    color: var(--text);
+}
+
+td small {
+    color: #8da1ba;
+}
+
+.empty-row {
+    color: var(--muted);
+}
+
+/* STATUS LABELS */
+
+.status.pending {
+    background: #392d17;
+    color: #fcd36a;
+}
+
+.status.in-progress {
+    background: #172f50;
+    color: #93c5fd;
+}
+
+.status.resolved {
+    background: #143629;
+    color: #6ee7b7;
+}
+
+/* AUTHENTICATION PAGES */
+
+.auth-page {
+    background: var(--background);
+    color: var(--text);
+}
+
+.auth-intro {
+    background: linear-gradient(
+        145deg,
+        #0b1d36,
+        #123e70
+    );
+    border: 1px solid #24466d;
+}
+
+.auth-intro p {
+    color: #c6d9f0;
+}
+
+.auth-card-heading p {
+    color: var(--muted);
+}
+
+.password-wrapper {
+    background: #0b1627;
+    border-color: var(--border);
+}
+
+.password-wrapper input {
+    background: transparent;
+}
+
+.password-wrapper button {
+    color: var(--cyan);
+}
+
+.auth-message {
+    color: var(--cyan);
+}
+
+.public-link {
+    color: var(--cyan);
+}
+
+.public-link:hover {
+    color: #7dd3fc;
+}
+
+/* FOOTERS */
+
+.footer,
+.auth-footer {
+    background: #0c1626;
+    border-color: var(--border);
+    color: var(--muted);
+}
+
+.footer strong {
+    color: var(--text);
+}
+
+/* ACCESSIBILITY */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+/* RESPONSIVE */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+
+/* CITIZEN COMPLAINT REVIEW STATUSES */
+
+.status.pending-review {
+    background: #392d17;
+    color: #fcd36a;
+}
+
+.status.approved {
+    background: #172f50;
+    color: #93c5fd;
+}
+
+.status.rejected {
+    background: #3a1e29;
+    color: #fda4af;
+}
+
+.status.in-progress {
+    background: #173449;
+    color: #67e8f9;
+}
+

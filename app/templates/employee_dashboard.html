@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Dashboard | CivicTrack</title>
+
+    <link rel="stylesheet" href="/static/css/dark-theme.css">
+    <link rel="stylesheet" href="/static/css/employee.css">
+
+    <script src="/static/js/employee.js" defer></script>
+</head>
+
+<body>
+
+<header class="employee-header">
+
+    <a href="/" class="employee-brand">
+        <span class="brand-symbol">C</span>
+        <span>
+            CivicTrack
+            <small>EMPLOYEE PORTAL</small>
+        </span>
+    </a>
+
+    <div class="employee-profile">
+        <span class="profile-avatar">E</span>
+        <span>
+            <strong id="employee-name">Demo Employee</strong>
+            <small id="employee-department">Water Supply</small>
+        </span>
+    </div>
+
+</header>
+
+
+<main class="employee-container">
+
+    <section class="dashboard-heading">
+
+        <div>
+            <span class="eyebrow">EMPLOYEE WORKSPACE</span>
+            <h1>Complaint Management</h1>
+            <p>
+                Review incoming civic issues, take responsibility
+                and track your work.
+            </p>
+        </div>
+
+        <button id="refresh-button" class="refresh-button">
+            ↻ Refresh
+        </button>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="employee-stats">
+
+        <article class="employee-stat">
+            <span>Awaiting Review</span>
+            <strong id="pending-count">0</strong>
+            <small>New complaints</small>
+        </article>
+
+        <article class="employee-stat">
+            <span>Approved</span>
+            <strong id="approved-count">0</strong>
+            <small>Waiting to be claimed</small>
+        </article>
+
+        <article class="employee-stat">
+            <span>In Progress</span>
+            <strong id="progress-count">0</strong>
+            <small>Active assignments</small>
+        </article>
+
+        <article class="employee-stat">
+            <span>Resolved</span>
+            <strong id="resolved-count">0</strong>
+            <small>Completed complaints</small>
+        </article>
+
+    </section>
+
+
+    <!-- COMPLAINT MANAGEMENT -->
+
+    <section class="employee-panel">
+
+        <div class="panel-heading">
+
+            <div>
+                <span class="eyebrow">WORK QUEUE</span>
+                <h2>Incoming Complaints</h2>
+                <p>Complaints belonging to your department.</p>
+            </div>
+
+            <select id="complaint-filter" aria-label="Filter complaints">
+                <option value="All">All complaints</option>
+                <option value="Pending Review">Awaiting review</option>
+                <option value="Approved">Approved</option>
+                <option value="In Progress">In progress</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Resolved">Resolved</option>
+            </select>
+
+        </div>
+
+
+        <p id="dashboard-message" class="dashboard-message"
+           role="status" aria-live="polite"></p>
+
+
+        <div id="complaint-list" class="complaint-list">
+
+            <div class="loading">
+                Loading complaints...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer class="employee-footer">
+        CivicTrack · Employee Portal · Local development prototype
+    </footer>
+
+</main>
+
+</body>
+</html>
+

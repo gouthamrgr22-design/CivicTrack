@@ -18,6 +18,7 @@
     <title>CivicTrack | Public Service Portal</title>
 
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dark-theme.css">
 
     <script src="/static/js/app.js" defer></script>
 </head>
@@ -84,6 +85,7 @@
             </div>
 
             <div class="hero-visual" aria-hidden="true">
+
                 <div class="visual-circle">
                     <span>⌂</span>
                 </div>
@@ -92,6 +94,7 @@
                     <span>COMMUNITY FIRST</span>
                     <strong>TOGETHER WE IMPROVE</strong>
                 </div>
+
             </div>
 
         </section>
@@ -108,7 +111,9 @@
                     <h2>Community Dashboard</h2>
                 </div>
 
-                <span class="demo-label">DEMO DATA</span>
+                <span class="demo-label">
+                    SQLITE DATABASE
+                </span>
 
             </div>
 
@@ -167,7 +172,9 @@
 
             <article class="panel report-panel">
 
-                <span class="eyebrow">MAKE YOUR VOICE HEARD</span>
+                <span class="eyebrow">
+                    MAKE YOUR VOICE HEARD
+                </span>
 
                 <h2>Report a Civic Issue</h2>
 
@@ -208,13 +215,35 @@
                             name="category"
                             required
                         >
-                            <option value="">Select a category</option>
-                            <option value="Road Damage">Road Damage</option>
-                            <option value="Streetlight">Streetlight</option>
-                            <option value="Water Leakage">Water Leakage</option>
-                            <option value="Drainage">Drainage</option>
-                            <option value="Garbage">Garbage Collection</option>
-                            <option value="Other">Other</option>
+
+                            <option value="">
+                                Select a category
+                            </option>
+
+                            <option value="Road Damage">
+                                Road Damage
+                            </option>
+
+                            <option value="Streetlight">
+                                Streetlight
+                            </option>
+
+                            <option value="Water Leakage">
+                                Water Leakage
+                            </option>
+
+                            <option value="Drainage">
+                                Drainage
+                            </option>
+
+                            <option value="Garbage">
+                                Garbage Collection
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
                         </select>
 
                     </div>
@@ -256,10 +285,14 @@
                     </div>
 
 
-                    <button type="submit" class="submit-button">
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
                         Submit Complaint
                         <span aria-hidden="true">→</span>
                     </button>
+
 
                     <p
                         id="form-message"
@@ -292,6 +325,7 @@
 
                     <div>
                         <strong>Report an Issue</strong>
+
                         <p>
                             Citizens submit the details of a local
                             problem.
@@ -307,9 +341,10 @@
 
                     <div>
                         <strong>Review and Assignment</strong>
+
                         <p>
-                            The relevant authority reviews
-                            the reported problem.
+                            The relevant employee reviews and
+                            processes the reported problem.
                         </p>
                     </div>
 
@@ -322,8 +357,10 @@
 
                     <div>
                         <strong>Track Progress</strong>
+
                         <p>
-                            Citizens follow the complaint status.
+                            Citizens follow employee decisions,
+                            progress updates and resolution.
                         </p>
                     </div>
 
@@ -335,9 +372,10 @@
                     <strong>Prototype Information</strong>
 
                     <p>
-                        This is the first CivicTrack prototype.
-                        Reports are stored in your browser and
-                        are not sent to any government authority.
+                        Complaints submitted through this prototype are
+                        stored in the CivicTrack SQLite database on
+                        this server. Citizen and employee accounts
+                        are not yet connected to real authentication.
                     </p>
 
                 </div>
@@ -347,30 +385,63 @@
         </section>
 
 
-        <!-- COMPLAINT TABLE -->
+        <!-- COMPLAINT TRANSPARENCY TABLE -->
 
-        <section id="complaints" class="panel complaints-panel">
+        <section
+            id="complaints"
+            class="panel complaints-panel"
+        >
 
             <div class="section-heading">
 
                 <div>
                     <span class="eyebrow">TRANSPARENCY</span>
                     <h2>Recent Complaints</h2>
+
+                    <p class="muted">
+                        View complaint decisions and follow their progress.
+                    </p>
                 </div>
 
+
+                <!-- COMPLAINT STATUS FILTER -->
 
                 <select
                     id="status-filter"
                     class="filter-select"
                     aria-label="Filter complaints by status"
                 >
-                    <option value="All">All Complaints</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Resolved">Resolved</option>
+
+                    <option value="All">
+                        All Complaints
+                    </option>
+
+                    <option value="Pending Review">
+                        Pending Review
+                    </option>
+
+                    <option value="Approved">
+                        Approved
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                    <option value="Resolved">
+                        Resolved
+                    </option>
+
                 </select>
 
             </div>
 
+
+            <!-- COMPLAINT TABLE -->
 
             <div class="table-container">
 
@@ -384,6 +455,7 @@
                             <th>CATEGORY</th>
                             <th>LOCATION</th>
                             <th>STATUS</th>
+                            <th>TRACKING</th>
                         </tr>
 
                     </thead>
@@ -410,10 +482,13 @@
             <p>Building better communities together.</p>
         </div>
 
-        <span>Version v1 · Frontend prototype</span>
+        <span>
+            Version v2 · SQLite-backed prototype
+        </span>
 
     </footer>
 
 </body>
+
 </html>
 
