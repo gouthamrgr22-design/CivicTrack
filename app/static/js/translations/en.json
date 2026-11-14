@@ -1,0 +1,140 @@
+{
+  "language": {
+    "label": "Language",
+    "selectLabel": "Choose language"
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "report": "Report Issue",
+    "complaints": "Complaints",
+    "login": "Login",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "eyebrow": "BUILDING BETTER COMMUNITIES",
+    "line1": "Your city.",
+    "line2": "Your voice.",
+    "line3": "Your impact.",
+    "description": "Help improve your neighbourhood by reporting civic issues. Track complaints and bring attention to the problems that matter.",
+    "button": "Report an Issue",
+    "visualLabel": "COMMUNITY FIRST",
+    "visualStatement": "TOGETHER WE IMPROVE"
+  },
+  "dashboard": {
+    "eyebrow": "LIVE OVERVIEW",
+    "title": "Community Dashboard",
+    "database": "SQLITE DATABASE",
+    "total": "Total Complaints",
+    "totalDescription": "All submitted reports",
+    "pending": "Pending",
+    "pendingDescription": "Awaiting action",
+    "resolved": "Resolved",
+    "resolvedDescription": "Issues addressed"
+  },
+  "report": {
+    "eyebrow": "MAKE YOUR VOICE HEARD",
+    "title": "Report a Civic Issue",
+    "introduction": "Provide the details below to report a problem in your neighbourhood.",
+    "issueTitle": "Issue Title",
+    "issuePlaceholder": "Example: Pothole near main road",
+    "category": "Issue Category",
+    "categoryPlaceholder": "Select a category",
+    "roadDamage": "Road Damage",
+    "streetlight": "Streetlight",
+    "waterLeakage": "Water Leakage",
+    "drainage": "Drainage",
+    "garbage": "Garbage Collection",
+    "other": "Other",
+    "location": "Location",
+    "locationPlaceholder": "Street, area or landmark",
+    "description": "Description",
+    "descriptionPlaceholder": "Explain the issue...",
+    "submit": "Submit Complaint"
+  },
+  "process": {
+    "eyebrow": "OUR PROCESS",
+    "title": "How CivicTrack Works",
+    "description": "Making civic participation simple and transparent.",
+    "step1Title": "Report an Issue",
+    "step1Description": "Citizens submit the details of a local problem.",
+    "step2Title": "Review and Assignment",
+    "step2Description": "The relevant employee reviews and processes the reported problem.",
+    "step3Title": "Track Progress",
+    "step3Description": "Citizens follow employee decisions, progress updates and resolution.",
+    "noticeTitle": "Prototype Information",
+    "noticeDescription": "Complaints submitted through this prototype are stored in the CivicTrack SQLite database on this server. Citizen and employee accounts are not yet connected to real authentication."
+  },
+  "complaints": {
+    "eyebrow": "TRANSPARENCY",
+    "title": "Recent Complaints",
+    "description": "View complaint decisions and follow their progress.",
+    "filterLabel": "Filter complaints by status",
+    "filterAll": "All Complaints",
+    "filterPending": "Pending Review",
+    "filterApproved": "Approved",
+    "filterProgress": "In Progress",
+    "filterRejected": "Rejected",
+    "filterResolved": "Resolved",
+    "reference": "REFERENCE",
+    "issue": "ISSUE",
+    "category": "CATEGORY",
+    "location": "LOCATION",
+    "status": "STATUS",
+    "tracking": "TRACKING"
+  },
+  "footer": {
+    "description": "Building better communities together.",
+    "version": "Version v2 · SQLite-backed prototype"
+  },
+  "categories": {
+    "roadDamage": "Road Damage",
+    "streetlight": "Streetlight",
+    "waterLeakage": "Water Leakage",
+    "drainage": "Drainage",
+    "garbage": "Garbage Collection",
+    "other": "Other"
+  },
+  "status": {
+    "new": "New",
+    "pending": "Pending",
+    "pendingReview": "Pending Review",
+    "approved": "Approved",
+    "inProgress": "In Progress",
+    "rejected": "Rejected",
+    "resolved": "Resolved"
+  },
+  "common": {
+    "noComplaints": "No complaints found.",
+    "viewTracking": "View Tracking",
+    "loading": "Loading...",
+    "hideTracking": "Hide Tracking",
+    "retryTracking": "Retry Tracking"
+  },
+  "tracking": {
+    "currentStatus": "Current status",
+    "rejectionReason": "Rejection reason",
+    "resolution": "Resolution",
+    "activityHistory": "Complaint Activity History",
+    "noActivity": "No activity has been recorded yet.",
+    "recordedBy": "Recorded by",
+    "actions": {
+      "submitted": "Complaint Submitted",
+      "approve": "Complaint Approved",
+      "reject": "Complaint Rejected",
+      "take": "Employee Took Responsibility",
+      "update": "Progress Update",
+      "resolve": "Complaint Resolved"
+    }
+  },
+  "form": {
+    "submitting": "Submitting complaint...",
+    "submitFailed": "Complaint submission failed.",
+    "submitted": "Complaint {reference} submitted successfully."
+  },
+  "errors": {
+    "couldNotConnect": "Could not connect to CivicTrack. Refresh the page.",
+    "couldNotLoadComplaints": "Could not load complaints.",
+    "unableToLoadHistory": "Unable to load complaint history."
+  }
+}

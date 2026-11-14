@@ -1,0 +1,47 @@
+/* ==========================================
+   CIVICTRACK — LANGUAGE SELECTOR
+   ========================================== */
+
+.language-control {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.language-control label {
+    color: var(--muted, #9aacbf);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.language-control select {
+    min-width: 115px;
+    padding: 9px 12px;
+
+    background: #0b1627;
+    color: #eaf2ff;
+
+    border: 1px solid #263750;
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.language-control select:focus {
+    outline: 2px solid #176bff;
+    outline-offset: 2px;
+}
+
+.language-control option {
+    background: #0b1627;
+    color: #eaf2ff;
+}
+
+@media (max-width: 800px) {
+    .language-control {
+        margin-left: auto;
+    }
+}

@@ -16,6 +16,7 @@ DEPARTMENT_BY_CATEGORY = {
     "Water Leakage": "Water Supply",
     "Drainage": "Drainage",
     "Garbage": "Sanitation",
+    "Women's Safety": "Women Safety Cell",
     "Other": "General Services",
 }
 

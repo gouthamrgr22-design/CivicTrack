@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,72 +16,213 @@
 
     <title>CivicTrack | Public Service Portal</title>
 
+    <!-- ======================================
+         STYLESHEETS
+    ======================================= -->
+
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/dark-theme.css">
+    <link rel="stylesheet" href="/static/css/language.css">
 
+    <!-- NEW: Neon motion effects -->
+    <link rel="stylesheet" href="/static/css/motion.css">
+
+
+    <!-- ======================================
+         JAVASCRIPT
+    ======================================= -->
+
+    <!-- Translation engine -->
+    <script src="/static/js/i18n.js" defer></script>
+
+    <!-- Main application -->
     <script src="/static/js/app.js" defer></script>
+
+    <!-- NEW: Animated sparks and interactions -->
+    <script src="/static/js/motion.js" defer></script>
+
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+    <!-- ======================================
+         NAVIGATION
+    ======================================= -->
 
     <header class="navbar">
 
+        <!-- BRAND -->
+
         <a href="#home" class="brand">
+
             <span class="brand-icon">C</span>
 
             <span class="brand-text">
                 CivicTrack
                 <small>PUBLIC SERVICE PORTAL</small>
             </span>
+
         </a>
 
+
+        <!-- NAVIGATION LINKS -->
+
         <nav class="navigation">
-            <a href="#home">Home</a>
-            <a href="#dashboard">Dashboard</a>
-            <a href="#report">Report Issue</a>
-            <a href="#complaints">Complaints</a>
-            <a href="/templates/login.html">Login</a>
+
+            <a
+                href="#home"
+                data-i18n="navigation.home"
+            >
+                Home
+            </a>
+
+            <a
+                href="#dashboard"
+                data-i18n="navigation.dashboard"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="#report"
+                data-i18n="navigation.report"
+            >
+                Report Issue
+            </a>
+
+            <a
+                href="#complaints"
+                data-i18n="navigation.complaints"
+            >
+                Complaints
+            </a>
+
+            <a
+                href="/templates/login.html"
+                data-i18n="navigation.login"
+            >
+                Login
+            </a>
+
         </nav>
 
-        <a href="#report" class="nav-button">
+
+        <!-- LANGUAGE SELECTOR -->
+
+        <div class="language-control">
+
+            <label
+                for="language-selector"
+                data-i18n="language.label"
+            >
+                Language
+            </label>
+
+            <select
+                id="language-selector"
+                aria-label="Choose language"
+                data-i18n-aria="language.selectLabel"
+            >
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="kn" lang="kn">
+                    ಕನ್ನಡ
+                </option>
+
+                <option value="hi" lang="hi">
+                    हिन्दी
+                </option>
+
+                <option value="ta" lang="ta">
+                    தமிழ்
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- GET STARTED -->
+
+        <a
+            href="#report"
+            class="nav-button"
+            data-i18n="navigation.getStarted"
+        >
             Get Started
         </a>
 
     </header>
 
 
+    <!-- ======================================
+         MAIN CONTENT
+    ======================================= -->
+
     <main id="home" class="container">
 
-        <!-- HERO SECTION -->
+
+        <!-- ======================================
+             HERO SECTION
+        ======================================= -->
 
         <section class="hero">
 
             <div class="hero-content">
 
-                <span class="eyebrow">
+                <span
+                    class="eyebrow"
+                    data-i18n="hero.eyebrow"
+                >
                     BUILDING BETTER COMMUNITIES
                 </span>
 
                 <h1>
-                    Your city.<br>
-                    Your voice.<br>
-                    <span>Your impact.</span>
+
+                    <span data-i18n="hero.line1">
+                        Your city.
+                    </span>
+
+                    <br>
+
+                    <span data-i18n="hero.line2">
+                        Your voice.
+                    </span>
+
+                    <br>
+
+                    <span data-i18n="hero.line3">
+                        Your impact.
+                    </span>
+
                 </h1>
 
-                <p>
+                <p data-i18n="hero.description">
                     Help improve your neighbourhood by reporting
                     civic issues. Track complaints and bring
                     attention to the problems that matter.
                 </p>
 
-                <a href="#report" class="primary-button">
-                    Report an Issue
+                <a
+                    href="#report"
+                    class="primary-button"
+                >
+
+                    <span data-i18n="hero.button">
+                        Report an Issue
+                    </span>
+
                     <span aria-hidden="true">→</span>
+
                 </a>
 
             </div>
+
+
+            <!-- HERO VISUAL -->
 
             <div class="hero-visual" aria-hidden="true">
 
@@ -91,8 +231,15 @@
                 </div>
 
                 <div class="visual-label">
-                    <span>COMMUNITY FIRST</span>
-                    <strong>TOGETHER WE IMPROVE</strong>
+
+                    <span data-i18n="hero.visualLabel">
+                        COMMUNITY FIRST
+                    </span>
+
+                    <strong data-i18n="hero.visualStatement">
+                        TOGETHER WE IMPROVE
+                    </strong>
+
                 </div>
 
             </div>
@@ -100,18 +247,34 @@
         </section>
 
 
-        <!-- DASHBOARD STATISTICS -->
+
+        <!-- ======================================
+             DASHBOARD STATISTICS
+        ======================================= -->
 
         <section id="dashboard" class="section">
 
             <div class="section-heading">
 
                 <div>
-                    <span class="eyebrow">LIVE OVERVIEW</span>
-                    <h2>Community Dashboard</h2>
+
+                    <span
+                        class="eyebrow"
+                        data-i18n="dashboard.eyebrow"
+                    >
+                        LIVE OVERVIEW
+                    </span>
+
+                    <h2 data-i18n="dashboard.title">
+                        Community Dashboard
+                    </h2>
+
                 </div>
 
-                <span class="demo-label">
+                <span
+                    class="demo-label"
+                    data-i18n="dashboard.database"
+                >
                     SQLITE DATABASE
                 </span>
 
@@ -120,44 +283,80 @@
 
             <div class="statistics">
 
+
+                <!-- TOTAL COMPLAINTS -->
+
                 <article class="stat-card">
 
                     <div class="stat-top">
-                        <span>Total Complaints</span>
-                        <span class="stat-icon blue">▤</span>
+
+                        <span data-i18n="dashboard.total">
+                            Total Complaints
+                        </span>
+
+                        <span class="stat-icon blue">
+                            ▤
+                        </span>
+
                     </div>
 
                     <strong id="total-count">0</strong>
 
-                    <small>All submitted reports</small>
+                    <small data-i18n="dashboard.totalDescription">
+                        All submitted reports
+                    </small>
 
                 </article>
 
 
+
+                <!-- PENDING COMPLAINTS -->
+
                 <article class="stat-card">
 
                     <div class="stat-top">
-                        <span>Pending</span>
-                        <span class="stat-icon orange">◷</span>
+
+                        <span data-i18n="dashboard.pending">
+                            Pending
+                        </span>
+
+                        <span class="stat-icon orange">
+                            ◷
+                        </span>
+
                     </div>
 
                     <strong id="pending-count">0</strong>
 
-                    <small>Awaiting action</small>
+                    <small data-i18n="dashboard.pendingDescription">
+                        Awaiting action
+                    </small>
 
                 </article>
 
 
+
+                <!-- RESOLVED COMPLAINTS -->
+
                 <article class="stat-card">
 
                     <div class="stat-top">
-                        <span>Resolved</span>
-                        <span class="stat-icon green">✓</span>
+
+                        <span data-i18n="dashboard.resolved">
+                            Resolved
+                        </span>
+
+                        <span class="stat-icon green">
+                            ✓
+                        </span>
+
                     </div>
 
                     <strong id="resolved-count">0</strong>
 
-                    <small>Issues addressed</small>
+                    <small data-i18n="dashboard.resolvedDescription">
+                        Issues addressed
+                    </small>
 
                 </article>
 
@@ -166,19 +365,30 @@
         </section>
 
 
-        <!-- REPORT ISSUE SECTION -->
+
+        <!-- ======================================
+             REPORT ISSUE SECTION
+        ======================================= -->
 
         <section id="report" class="content-grid">
 
             <article class="panel report-panel">
 
-                <span class="eyebrow">
+                <span
+                    class="eyebrow"
+                    data-i18n="report.eyebrow"
+                >
                     MAKE YOUR VOICE HEARD
                 </span>
 
-                <h2>Report a Civic Issue</h2>
+                <h2 data-i18n="report.title">
+                    Report a Civic Issue
+                </h2>
 
-                <p class="muted">
+                <p
+                    class="muted"
+                    data-i18n="report.introduction"
+                >
                     Provide the details below to report a
                     problem in your neighbourhood.
                 </p>
@@ -186,9 +396,15 @@
 
                 <form id="complaint-form">
 
+
+                    <!-- ISSUE TITLE -->
+
                     <div class="form-group">
 
-                        <label for="title">
+                        <label
+                            for="title"
+                            data-i18n="report.issueTitle"
+                        >
                             Issue Title
                         </label>
 
@@ -197,6 +413,7 @@
                             id="title"
                             name="title"
                             placeholder="Example: Pothole near main road"
+                            data-i18n-placeholder="report.issuePlaceholder"
                             maxlength="80"
                             required
                         >
@@ -204,9 +421,15 @@
                     </div>
 
 
+
+                    <!-- ISSUE CATEGORY -->
+
                     <div class="form-group">
 
-                        <label for="category">
+                        <label
+                            for="category"
+                            data-i18n="report.category"
+                        >
                             Issue Category
                         </label>
 
@@ -216,31 +439,59 @@
                             required
                         >
 
-                            <option value="">
+                            <option
+                                value=""
+                                data-i18n="report.categoryPlaceholder"
+                            >
                                 Select a category
                             </option>
 
-                            <option value="Road Damage">
+                            <option
+                                value="Road Damage"
+                                data-i18n="report.roadDamage"
+                            >
                                 Road Damage
                             </option>
 
-                            <option value="Streetlight">
+                            <option
+                                value="Streetlight"
+                                data-i18n="report.streetlight"
+                            >
                                 Streetlight
                             </option>
 
-                            <option value="Water Leakage">
+                            <option
+                                value="Water Leakage"
+                                data-i18n="report.waterLeakage"
+                            >
                                 Water Leakage
                             </option>
 
-                            <option value="Drainage">
+                            <option
+                                value="Drainage"
+                                data-i18n="report.drainage"
+                            >
                                 Drainage
                             </option>
 
-                            <option value="Garbage">
+                            <option
+                                value="Women's Safety"
+                                data-i18n="report.womenSafety"
+                            >
+                                Women's Safety
+                            </option>
+
+                            <option
+                                value="Garbage"
+                                data-i18n="report.garbage"
+                            >
                                 Garbage Collection
                             </option>
 
-                            <option value="Other">
+                            <option
+                                value="Other"
+                                data-i18n="report.other"
+                            >
                                 Other
                             </option>
 
@@ -249,9 +500,15 @@
                     </div>
 
 
+
+                    <!-- LOCATION -->
+
                     <div class="form-group">
 
-                        <label for="location">
+                        <label
+                            for="location"
+                            data-i18n="report.location"
+                        >
                             Location
                         </label>
 
@@ -260,6 +517,7 @@
                             id="location"
                             name="location"
                             placeholder="Street, area or landmark"
+                            data-i18n-placeholder="report.locationPlaceholder"
                             maxlength="120"
                             required
                         >
@@ -267,9 +525,15 @@
                     </div>
 
 
+
+                    <!-- DESCRIPTION -->
+
                     <div class="form-group">
 
-                        <label for="description">
+                        <label
+                            for="description"
+                            data-i18n="report.description"
+                        >
                             Description
                         </label>
 
@@ -279,20 +543,31 @@
                             rows="4"
                             maxlength="1000"
                             placeholder="Explain the issue..."
+                            data-i18n-placeholder="report.descriptionPlaceholder"
                             required
                         ></textarea>
 
                     </div>
 
 
+
+                    <!-- SUBMIT BUTTON -->
+
                     <button
                         type="submit"
                         class="submit-button"
                     >
-                        Submit Complaint
+
+                        <span data-i18n="report.submit">
+                            Submit Complaint
+                        </span>
+
                         <span aria-hidden="true">→</span>
+
                     </button>
 
+
+                    <!-- FORM MESSAGE -->
 
                     <p
                         id="form-message"
@@ -306,72 +581,117 @@
             </article>
 
 
-            <!-- HOW IT WORKS -->
+
+            <!-- ======================================
+                 HOW CIVICTRACK WORKS
+            ======================================= -->
 
             <aside class="panel process-panel">
 
-                <span class="eyebrow">OUR PROCESS</span>
+                <span
+                    class="eyebrow"
+                    data-i18n="process.eyebrow"
+                >
+                    OUR PROCESS
+                </span>
 
-                <h2>How CivicTrack Works</h2>
+                <h2 data-i18n="process.title">
+                    How CivicTrack Works
+                </h2>
 
-                <p class="muted">
+                <p
+                    class="muted"
+                    data-i18n="process.description"
+                >
                     Making civic participation simple and transparent.
                 </p>
 
 
+
+                <!-- STEP 1 -->
+
                 <div class="process-step">
 
-                    <span class="step-number">01</span>
+                    <span class="step-number">
+                        01
+                    </span>
 
                     <div>
-                        <strong>Report an Issue</strong>
 
-                        <p>
+                        <strong data-i18n="process.step1Title">
+                            Report an Issue
+                        </strong>
+
+                        <p data-i18n="process.step1Description">
                             Citizens submit the details of a local
                             problem.
                         </p>
+
                     </div>
 
                 </div>
 
 
+
+                <!-- STEP 2 -->
+
                 <div class="process-step">
 
-                    <span class="step-number">02</span>
+                    <span class="step-number">
+                        02
+                    </span>
 
                     <div>
-                        <strong>Review and Assignment</strong>
 
-                        <p>
+                        <strong data-i18n="process.step2Title">
+                            Review and Assignment
+                        </strong>
+
+                        <p data-i18n="process.step2Description">
                             The relevant employee reviews and
                             processes the reported problem.
                         </p>
+
                     </div>
 
                 </div>
 
+
+
+                <!-- STEP 3 -->
 
                 <div class="process-step">
 
-                    <span class="step-number">03</span>
+                    <span class="step-number">
+                        03
+                    </span>
 
                     <div>
-                        <strong>Track Progress</strong>
 
-                        <p>
+                        <strong data-i18n="process.step3Title">
+                            Track Progress
+                        </strong>
+
+                        <p data-i18n="process.step3Description">
                             Citizens follow employee decisions,
                             progress updates and resolution.
                         </p>
+
                     </div>
 
                 </div>
 
 
+
+                <!-- PROTOTYPE NOTICE -->
+
                 <div class="notice">
 
-                    <strong>Prototype Information</strong>
+                    <strong data-i18n="process.noticeTitle">
+                        Prototype Information
+                    </strong>
 
-                    <p>
+                    <p data-i18n="process.noticeDescription">
                         Complaints submitted through this prototype are
                         stored in the CivicTrack SQLite database on
                         this server. Citizen and employee accounts
@@ -385,7 +705,10 @@
         </section>
 
 
-        <!-- COMPLAINT TRANSPARENCY TABLE -->
+
+        <!-- ======================================
+             COMPLAINT TRANSPARENCY TABLE
+        ======================================= -->
 
         <section
             id="complaints"
@@ -395,13 +718,27 @@
             <div class="section-heading">
 
                 <div>
-                    <span class="eyebrow">TRANSPARENCY</span>
-                    <h2>Recent Complaints</h2>
 
-                    <p class="muted">
+                    <span
+                        class="eyebrow"
+                        data-i18n="complaints.eyebrow"
+                    >
+                        TRANSPARENCY
+                    </span>
+
+                    <h2 data-i18n="complaints.title">
+                        Recent Complaints
+                    </h2>
+
+                    <p
+                        class="muted"
+                        data-i18n="complaints.description"
+                    >
                         View complaint decisions and follow their progress.
                     </p>
+
                 </div>
+
 
 
                 <!-- COMPLAINT STATUS FILTER -->
@@ -410,35 +747,55 @@
                     id="status-filter"
                     class="filter-select"
                     aria-label="Filter complaints by status"
+                    data-i18n-aria="complaints.filterLabel"
                 >
 
-                    <option value="All">
+                    <option
+                        value="All"
+                        data-i18n="complaints.filterAll"
+                    >
                         All Complaints
                     </option>
 
-                    <option value="Pending Review">
+                    <option
+                        value="Pending Review"
+                        data-i18n="complaints.filterPending"
+                    >
                         Pending Review
                     </option>
 
-                    <option value="Approved">
+                    <option
+                        value="Approved"
+                        data-i18n="complaints.filterApproved"
+                    >
                         Approved
                     </option>
 
-                    <option value="In Progress">
+                    <option
+                        value="In Progress"
+                        data-i18n="complaints.filterProgress"
+                    >
                         In Progress
                     </option>
 
-                    <option value="Rejected">
+                    <option
+                        value="Rejected"
+                        data-i18n="complaints.filterRejected"
+                    >
                         Rejected
                     </option>
 
-                    <option value="Resolved">
+                    <option
+                        value="Resolved"
+                        data-i18n="complaints.filterResolved"
+                    >
                         Resolved
                     </option>
 
                 </select>
 
             </div>
+
 
 
             <!-- COMPLAINT TABLE -->
@@ -450,12 +807,31 @@
                     <thead>
 
                         <tr>
-                            <th>REFERENCE</th>
-                            <th>ISSUE</th>
-                            <th>CATEGORY</th>
-                            <th>LOCATION</th>
-                            <th>STATUS</th>
-                            <th>TRACKING</th>
+
+                            <th data-i18n="complaints.reference">
+                                REFERENCE
+                            </th>
+
+                            <th data-i18n="complaints.issue">
+                                ISSUE
+                            </th>
+
+                            <th data-i18n="complaints.category">
+                                CATEGORY
+                            </th>
+
+                            <th data-i18n="complaints.location">
+                                LOCATION
+                            </th>
+
+                            <th data-i18n="complaints.status">
+                                STATUS
+                            </th>
+
+                            <th data-i18n="complaints.tracking">
+                                TRACKING
+                            </th>
+
                         </tr>
 
                     </thead>
@@ -473,16 +849,24 @@
     </main>
 
 
-    <!-- FOOTER -->
+
+    <!-- ======================================
+         FOOTER
+    ======================================= -->
 
     <footer class="footer">
 
         <div>
+
             <strong>CivicTrack</strong>
-            <p>Building better communities together.</p>
+
+            <p data-i18n="footer.description">
+                Building better communities together.
+            </p>
+
         </div>
 
-        <span>
+        <span data-i18n="footer.version">
             Version v2 · SQLite-backed prototype
         </span>
 
@@ -491,4 +875,3 @@
 </body>
 
 </html>
-

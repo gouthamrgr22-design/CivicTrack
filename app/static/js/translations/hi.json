@@ -1,0 +1,140 @@
+{
+  "language": {
+    "label": "भाषा",
+    "selectLabel": "भाषा चुनें"
+  },
+  "navigation": {
+    "home": "मुख्य पृष्ठ",
+    "dashboard": "डैशबोर्ड",
+    "report": "समस्या दर्ज करें",
+    "complaints": "शिकायतें",
+    "login": "लॉग इन",
+    "getStarted": "शुरू करें"
+  },
+  "hero": {
+    "eyebrow": "बेहतर समुदायों का निर्माण",
+    "line1": "आपका शहर।",
+    "line2": "आपकी आवाज़।",
+    "line3": "आपका प्रभाव।",
+    "description": "अपने क्षेत्र की नागरिक समस्याओं की रिपोर्ट करके उसे बेहतर बनाने में मदद करें। शिकायतों की स्थिति जानें और महत्वपूर्ण समस्याओं पर ध्यान आकर्षित करें।",
+    "button": "समस्या दर्ज करें",
+    "visualLabel": "समुदाय सबसे पहले",
+    "visualStatement": "मिलकर हम सुधार लाते हैं"
+  },
+  "dashboard": {
+    "eyebrow": "लाइव अवलोकन",
+    "title": "सामुदायिक डैशबोर्ड",
+    "database": "SQLITE डेटाबेस",
+    "total": "कुल शिकायतें",
+    "totalDescription": "दर्ज की गई सभी शिकायतें",
+    "pending": "लंबित",
+    "pendingDescription": "कार्रवाई की प्रतीक्षा में",
+    "resolved": "समाधान हो चुका",
+    "resolvedDescription": "समस्याओं का समाधान किया गया"
+  },
+  "report": {
+    "eyebrow": "अपनी आवाज़ उठाएँ",
+    "title": "नागरिक समस्या दर्ज करें",
+    "introduction": "अपने क्षेत्र की समस्या की रिपोर्ट करने के लिए नीचे दिए गए विवरण भरें।",
+    "issueTitle": "समस्या का शीर्षक",
+    "issuePlaceholder": "उदाहरण: मुख्य सड़क के पास गड्ढा",
+    "category": "समस्या की श्रेणी",
+    "categoryPlaceholder": "एक श्रेणी चुनें",
+    "roadDamage": "सड़क की क्षति",
+    "streetlight": "स्ट्रीट लाइट",
+    "waterLeakage": "पानी का रिसाव",
+    "drainage": "जल निकासी",
+    "garbage": "कचरा संग्रहण",
+    "other": "अन्य",
+    "location": "स्थान",
+    "locationPlaceholder": "सड़क, क्षेत्र या कोई पहचान योग्य स्थान",
+    "description": "विवरण",
+    "descriptionPlaceholder": "समस्या के बारे में विस्तार से बताएँ...",
+    "submit": "शिकायत जमा करें"
+  },
+  "process": {
+    "eyebrow": "हमारी प्रक्रिया",
+    "title": "CivicTrack कैसे काम करता है",
+    "description": "नागरिक भागीदारी को सरल और पारदर्शी बनाना।",
+    "step1Title": "समस्या दर्ज करें",
+    "step1Description": "नागरिक स्थानीय समस्या का विवरण जमा करते हैं।",
+    "step2Title": "समीक्षा और आवंटन",
+    "step2Description": "संबंधित कर्मचारी दर्ज की गई समस्या की समीक्षा करते हैं और उस पर कार्रवाई करते हैं।",
+    "step3Title": "प्रगति देखें",
+    "step3Description": "नागरिक कर्मचारी के निर्णयों, प्रगति और समाधान की स्थिति देख सकते हैं।",
+    "noticeTitle": "प्रोटोटाइप की जानकारी",
+    "noticeDescription": "इस प्रोटोटाइप के माध्यम से जमा की गई शिकायतें इस सर्वर के CivicTrack SQLite डेटाबेस में संग्रहीत होती हैं। नागरिक और कर्मचारी खाते अभी वास्तविक प्रमाणीकरण प्रणाली से जुड़े नहीं हैं।"
+  },
+  "complaints": {
+    "eyebrow": "पारदर्शिता",
+    "title": "हाल की शिकायतें",
+    "description": "शिकायतों पर लिए गए निर्णय देखें और उनकी प्रगति जानें।",
+    "filterLabel": "स्थिति के अनुसार शिकायतें फ़िल्टर करें",
+    "filterAll": "सभी शिकायतें",
+    "filterPending": "समीक्षा के लिए लंबित",
+    "filterApproved": "स्वीकृत",
+    "filterProgress": "कार्य प्रगति पर",
+    "filterRejected": "अस्वीकृत",
+    "filterResolved": "समाधान हो चुका",
+    "reference": "संदर्भ संख्या",
+    "issue": "समस्या",
+    "category": "श्रेणी",
+    "location": "स्थान",
+    "status": "स्थिति",
+    "tracking": "ट्रैकिंग"
+  },
+  "footer": {
+    "description": "मिलकर बेहतर समुदायों का निर्माण करें।",
+    "version": "संस्करण v2 · SQLite आधारित प्रोटोटाइप"
+  },
+  "categories": {
+    "roadDamage": "सड़क की क्षति",
+    "streetlight": "स्ट्रीट लाइट",
+    "waterLeakage": "पानी का रिसाव",
+    "drainage": "जल निकासी",
+    "garbage": "कचरा संग्रहण",
+    "other": "अन्य"
+  },
+  "status": {
+    "new": "नई",
+    "pending": "लंबित",
+    "pendingReview": "समीक्षा के लिए लंबित",
+    "approved": "स्वीकृत",
+    "inProgress": "कार्य प्रगति पर",
+    "rejected": "अस्वीकृत",
+    "resolved": "समाधान हो चुका"
+  },
+  "common": {
+    "noComplaints": "कोई शिकायत नहीं मिली।",
+    "viewTracking": "ट्रैकिंग देखें",
+    "loading": "लोड हो रहा है...",
+    "hideTracking": "ट्रैकिंग छिपाएँ",
+    "retryTracking": "ट्रैकिंग फिर से देखें"
+  },
+  "tracking": {
+    "currentStatus": "वर्तमान स्थिति",
+    "rejectionReason": "अस्वीकृति का कारण",
+    "resolution": "समाधान",
+    "activityHistory": "शिकायत गतिविधि का इतिहास",
+    "noActivity": "अभी तक कोई गतिविधि दर्ज नहीं की गई है।",
+    "recordedBy": "दर्ज करने वाला",
+    "actions": {
+      "submitted": "शिकायत दर्ज की गई",
+      "approve": "शिकायत स्वीकृत की गई",
+      "reject": "शिकायत अस्वीकृत की गई",
+      "take": "कर्मचारी ने जिम्मेदारी ली",
+      "update": "प्रगति अपडेट",
+      "resolve": "शिकायत का समाधान किया गया"
+    }
+  },
+  "form": {
+    "submitting": "शिकायत जमा की जा रही है...",
+    "submitFailed": "शिकायत जमा नहीं हो सकी।",
+    "submitted": "शिकायत {reference} सफलतापूर्वक दर्ज की गई।"
+  },
+  "errors": {
+    "couldNotConnect": "CivicTrack से कनेक्ट नहीं हो सका। पेज को रीफ़्रेश करें।",
+    "couldNotLoadComplaints": "शिकायतें लोड नहीं हो सकीं।",
+    "unableToLoadHistory": "शिकायत का इतिहास लोड नहीं हो सका।"
+  }
+}

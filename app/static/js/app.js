@@ -2,6 +2,7 @@
 /*
  * CivicTrack v2
  * Citizen portal: SQLite complaints and tracking timeline.
+ * Multilingual interface: English + Kannada.
  */
 
 let complaints = [];
@@ -10,6 +11,80 @@ const complaintForm = document.querySelector("#complaint-form");
 const complaintList = document.querySelector("#complaint-list");
 const statusFilter = document.querySelector("#status-filter");
 const formMessage = document.querySelector("#form-message");
+
+// Cache tracking responses so expanded timelines can be
+// redrawn when the user changes the language.
+const trackingDataCache = new Map();
+
+
+// ==========================================
+// CIVICTRACK TRANSLATION HELPERS
+// ==========================================
+
+function tr(key, replacements = {}) {
+
+    let translation = key;
+
+    if (
+        typeof CivicI18n !== "undefined" &&
+        typeof CivicI18n.translate === "function"
+    ) {
+        translation = CivicI18n.translate(key) || key;
+    }
+
+    for (const [name, value] of Object.entries(replacements)) {
+        translation = translation.replaceAll(
+            `{${name}}`,
+            String(value)
+        );
+    }
+
+    return translation;
+}
+
+
+// ==========================================
+// STATUS TRANSLATION
+// ==========================================
+
+function translateStatus(status) {
+
+    const statusKeys = {
+        "New": "status.new",
+        "Pending": "status.pending",
+        "Pending Review": "status.pendingReview",
+        "Approved": "status.approved",
+        "In Progress": "status.inProgress",
+        "Rejected": "status.rejected",
+        "Resolved": "status.resolved"
+    };
+
+    const key = statusKeys[status];
+
+    return key ? tr(key) : status;
+}
+
+
+// ==========================================
+// CATEGORY TRANSLATION
+// ==========================================
+
+function translateCategory(category) {
+
+    const categoryKeys = {
+        "Road Damage": "categories.roadDamage",
+        "Streetlight": "categories.streetlight",
+        "Water Leakage": "categories.waterLeakage",
+        "Drainage": "categories.drainage",
+        "Garbage": "categories.garbage",
+        "Garbage Collection": "categories.garbage",
+        "Other": "categories.other"
+    };
+
+    const key = categoryKeys[category];
+
+    return key ? tr(key) : category;
+}
 
 
 // ==========================================
@@ -49,10 +124,13 @@ function updateStatistics(statistics) {
 
 
 // ==========================================
-// STATUS DISPLAY
+// STATUS DISPLAY CLASS
 // ==========================================
 
 function getStatusClass(status) {
+
+    // Keep the original English status for CSS classes.
+    // Only the visible text is translated.
 
     return status.toLowerCase().replaceAll(" ", "-");
 
@@ -86,7 +164,7 @@ function renderComplaints() {
         const cell = createElement(
             "td",
             "empty-row",
-            "No complaints found."
+            tr("common.noComplaints")
         );
 
         cell.colSpan = 6;
@@ -106,10 +184,29 @@ function renderComplaints() {
         const row = document.createElement("tr");
 
         row.append(
-            createElement("td", "", complaint.reference),
-            createElement("td", "", complaint.title),
-            createElement("td", "", complaint.category),
-            createElement("td", "", complaint.location)
+            createElement(
+                "td",
+                "",
+                complaint.reference
+            ),
+
+            createElement(
+                "td",
+                "",
+                complaint.title
+            ),
+
+            createElement(
+                "td",
+                "",
+                translateCategory(complaint.category)
+            ),
+
+            createElement(
+                "td",
+                "",
+                complaint.location
+            )
         );
 
 
@@ -120,7 +217,7 @@ function renderComplaints() {
         const status = createElement(
             "span",
             `status ${getStatusClass(complaint.status)}`,
-            complaint.status
+            translateStatus(complaint.status)
         );
 
         statusCell.appendChild(status);
@@ -135,7 +232,7 @@ function renderComplaints() {
         const trackingButton = createElement(
             "button",
             "track-button",
-            "View Tracking"
+            tr("common.viewTracking")
         );
 
         trackingButton.type = "button";
@@ -201,15 +298,17 @@ function renderTracking(data) {
         createElement(
             "p",
             "tracking-subtitle",
-            `${complaint.category} · ${complaint.department}`
+            `${translateCategory(complaint.category)} · ${complaint.department}`
         )
     );
 
 
+    // Current status.
+
     const currentStatus = createElement(
         "span",
         `status ${getStatusClass(complaint.status)}`,
-        `Current status: ${complaint.status}`
+        `${tr("tracking.currentStatus")}: ${translateStatus(complaint.status)}`
     );
 
     heading.append(headingText, currentStatus);
@@ -217,7 +316,8 @@ function renderTracking(data) {
     panel.appendChild(heading);
 
 
-    // Description.
+    // Original complaint description.
+    // User-submitted content stays unchanged.
 
     panel.appendChild(
         createElement(
@@ -236,7 +336,7 @@ function renderTracking(data) {
             createElement(
                 "p",
                 "tracking-important",
-                `Rejection reason: ${complaint.rejection_reason}`
+                `${tr("tracking.rejectionReason")}: ${complaint.rejection_reason}`
             )
         );
 
@@ -251,18 +351,20 @@ function renderTracking(data) {
             createElement(
                 "p",
                 "tracking-resolution",
-                `Resolution: ${complaint.resolution_note}`
+                `${tr("tracking.resolution")}: ${complaint.resolution_note}`
             )
         );
 
     }
 
 
+    // Activity history heading.
+
     panel.appendChild(
         createElement(
             "h4",
             "timeline-title",
-            "Complaint Activity History"
+            tr("tracking.activityHistory")
         )
     );
 
@@ -273,26 +375,30 @@ function renderTracking(data) {
     );
 
 
+    // No activity.
+
     if (data.updates.length === 0) {
 
         timeline.appendChild(
             createElement(
                 "p",
                 "empty-row",
-                "No activity has been recorded yet."
+                tr("tracking.noActivity")
             )
         );
 
     }
 
 
+    // Translate activity names.
+
     const actionNames = {
-        submitted: "Complaint Submitted",
-        approve: "Complaint Approved",
-        reject: "Complaint Rejected",
-        take: "Employee Took Responsibility",
-        update: "Progress Update",
-        resolve: "Complaint Resolved"
+        submitted: tr("tracking.actions.submitted"),
+        approve: tr("tracking.actions.approve"),
+        reject: tr("tracking.actions.reject"),
+        take: tr("tracking.actions.take"),
+        update: tr("tracking.actions.update"),
+        resolve: tr("tracking.actions.resolve")
     };
 
 
@@ -328,7 +434,7 @@ function renderTracking(data) {
         event.appendChild(eventTop);
 
 
-        // Previous status → New status.
+        // Previous status -> New status.
 
         const transition = createElement(
             "div",
@@ -339,7 +445,7 @@ function renderTracking(data) {
             createElement(
                 "span",
                 "transition-from",
-                update.previous_status || "New"
+                translateStatus(update.previous_status || "New")
             ),
 
             createElement(
@@ -351,14 +457,15 @@ function renderTracking(data) {
             createElement(
                 "span",
                 "transition-to",
-                update.new_status || "Pending Review"
+                translateStatus(update.new_status || "Pending Review")
             )
         );
 
         event.appendChild(transition);
 
 
-        // Employee or citizen message.
+        // Original employee/citizen message.
+        // Do not automatically translate user-written content.
 
         event.appendChild(
             createElement(
@@ -373,7 +480,7 @@ function renderTracking(data) {
             createElement(
                 "small",
                 "timeline-actor",
-                `Recorded by: ${update.actor_name}`
+                `${tr("tracking.recordedBy")}: ${update.actor_name}`
             )
         );
 
@@ -396,20 +503,30 @@ function renderTracking(data) {
 
 async function loadTracking(reference, historyCell) {
 
-    const response = await fetch(
-        `/api/complaints/${encodeURIComponent(reference)}/tracking`,
-        {
-            cache: "no-store"
-        }
-    );
+    // Reuse cached tracking information when available.
 
-    const data = await response.json();
+    let data = trackingDataCache.get(reference);
 
-    if (!response.ok) {
+    if (!data) {
 
-        throw new Error(
-            data.error || "Unable to load complaint history."
+        const response = await fetch(
+            `/api/complaints/${encodeURIComponent(reference)}/tracking`,
+            {
+                cache: "no-store"
+            }
         );
+
+        data = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error || tr("errors.unableToLoadHistory")
+            );
+
+        }
+
+        trackingDataCache.set(reference, data);
 
     }
 
@@ -440,7 +557,7 @@ async function loadDashboard() {
         if (!response.ok) {
 
             throw new Error(
-                data.error || "Could not load complaints."
+                data.error || tr("errors.couldNotLoadComplaints")
             );
 
         }
@@ -456,7 +573,7 @@ async function loadDashboard() {
         console.error("Dashboard error:", error);
 
         formMessage.textContent =
-            "Could not connect to CivicTrack. Refresh the page.";
+            tr("errors.couldNotConnect");
 
     }
 
@@ -500,7 +617,7 @@ complaintForm.addEventListener("submit", async event => {
 
     button.disabled = true;
 
-    formMessage.textContent = "Submitting complaint...";
+    formMessage.textContent = tr("form.submitting");
 
 
     try {
@@ -523,15 +640,16 @@ complaintForm.addEventListener("submit", async event => {
         if (!response.ok) {
 
             throw new Error(
-                data.error || "Complaint submission failed."
+                data.error || tr("form.submitFailed")
             );
 
         }
 
         complaintForm.reset();
 
-        formMessage.textContent =
-            `Complaint ${data.complaint.reference} submitted successfully.`;
+        formMessage.textContent = tr("form.submitted", {
+            reference: data.complaint.reference
+        });
 
         statusFilter.value = "All";
 
@@ -582,7 +700,8 @@ complaintList.addEventListener("click", async event => {
     ) {
 
         historyRow.hidden = true;
-        button.textContent = "View Tracking";
+
+        button.textContent = tr("common.viewTracking");
 
         return;
 
@@ -592,7 +711,8 @@ complaintList.addEventListener("click", async event => {
     historyRow.hidden = false;
 
     button.disabled = true;
-    button.textContent = "Loading...";
+    button.textContent = tr("common.loading");
+
 
     try {
 
@@ -602,7 +722,8 @@ complaintList.addEventListener("click", async event => {
         );
 
         button.dataset.loaded = "true";
-        button.textContent = "Hide Tracking";
+
+        button.textContent = tr("common.hideTracking");
 
     } catch (error) {
 
@@ -610,7 +731,7 @@ complaintList.addEventListener("click", async event => {
             createElement("p", "empty-row", error.message)
         );
 
-        button.textContent = "Retry Tracking";
+        button.textContent = tr("common.retryTracking");
 
     } finally {
 
@@ -622,6 +743,77 @@ complaintList.addEventListener("click", async event => {
 
 
 // ==========================================
+// LANGUAGE CHANGE EVENT
+// ==========================================
+
+document.addEventListener(
+    "civictrack:languageChanged",
+    () => {
+
+        // Remember which tracking panels are currently open.
+
+        const expandedReferences = Array.from(
+            complaintList.querySelectorAll("button[data-reference]")
+        )
+            .filter(button => {
+
+                const historyRow =
+                    button.closest("tr").nextElementSibling;
+
+                return (
+                    !historyRow.hidden &&
+                    button.dataset.loaded === "true"
+                );
+
+            })
+            .map(button => button.dataset.reference);
+
+
+        // Re-render complaint rows in the selected language.
+
+        renderComplaints();
+
+
+        // Restore previously expanded tracking panels.
+
+        for (const reference of expandedReferences) {
+
+            const button = Array.from(
+                complaintList.querySelectorAll("button[data-reference]")
+            ).find(item => item.dataset.reference === reference);
+
+            if (!button) {
+                continue;
+            }
+
+            const historyRow =
+                button.closest("tr").nextElementSibling;
+
+            const historyCell =
+                historyRow.querySelector(".tracking-cell");
+
+            historyRow.hidden = false;
+
+            button.dataset.loaded = "true";
+            button.textContent = tr("common.hideTracking");
+
+            const cachedData = trackingDataCache.get(reference);
+
+            if (cachedData) {
+
+                historyCell.replaceChildren(
+                    renderTracking(cachedData)
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+// ==========================================
 // FILTER AND START APPLICATION
 // ==========================================
 
@@ -629,6 +821,7 @@ statusFilter.addEventListener(
     "change",
     renderComplaints
 );
+
 
 loadDashboard();
 

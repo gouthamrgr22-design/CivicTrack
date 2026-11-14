@@ -28,6 +28,7 @@ ALLOWED_CATEGORIES = {
     "Streetlight",
     "Water Leakage",
     "Drainage",
+    "Women's Safety",
     "Garbage",
     "Other",
 }
