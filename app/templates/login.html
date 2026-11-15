@@ -1,30 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="description"
-        content="Sign in to CivicTrack."
+        content="CivicTrack V3 - Your community, your voice, your impact."
     >
 
-    <title>Sign In | CivicTrack</title>
+    <meta name="theme-color" content="#080f1d">
+
+    <title>Authentication | CivicTrack V3</title>
 
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/auth.css">
     <link rel="stylesheet" href="/static/css/dark-theme.css">
+    <link rel="stylesheet" href="/static/css/auth.css">
 
     <script src="/static/js/auth.js" defer></script>
 </head>
 
 <body class="auth-page">
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
 
     <header class="auth-header">
 
@@ -39,109 +40,167 @@
 
         </a>
 
-        <a href="/" class="back-home">
-            ← Back to homepage
-        </a>
+        <div class="header-right">
+            <span class="system-status">
+                <span class="status-dot"></span>
+                CIVICTRACK V3
+            </span>
+
+            <a href="/" class="back-home">
+                ← Back to homepage
+            </a>
+        </div>
 
     </header>
 
 
+    <!-- ======================================
+         MAIN AUTHENTICATION LAYOUT
+    ======================================= -->
+
     <main class="auth-layout">
 
-        <section class="auth-intro">
+        <!-- LEFT SIDE -->
 
-            <span class="eyebrow">
-                COMMUNITY FIRST
-            </span>
+        <section class="auth-visual">
 
-            <h1>
-                Your community.<br>
-                Your voice.<br>
-                Your impact.
-            </h1>
+            <div class="visual-content">
 
-            <p>
-                Sign in to access your CivicTrack account,
-                report local issues and follow complaint
-                progress.
-            </p>
+                <span class="eyebrow">
+                    CIVIC PARTICIPATION, CONNECTED
+                </span>
 
-            <div class="auth-decoration" aria-hidden="true">
-                <span>⌂</span>
+                <h1>
+                    Your city.<br>
+                    Your voice.<br>
+                    <span>Your impact.</span>
+                </h1>
+
+                <p class="visual-description">
+                    A better community begins with someone
+                    speaking up. Report local issues, follow
+                    their progress and help make a difference.
+                </p>
+
+
+                <!-- DECORATIVE VISUAL -->
+
+                <div class="city-visual" aria-hidden="true">
+
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
+
+                    <div class="visual-center">
+                        <span>⌂</span>
+                        <small>COMMUNITY</small>
+                    </div>
+
+                    <div class="floating-icon icon-one">⌖</div>
+                    <div class="floating-icon icon-two">✓</div>
+                    <div class="floating-icon icon-three">⌘</div>
+
+                </div>
+
+
+                <!-- FEATURE INDICATORS -->
+
+                <div class="visual-features">
+
+                    <div class="visual-feature">
+                        <span class="feature-icon">01</span>
+                        <span>
+                            <strong>Report</strong>
+                            <small>Make your voice heard</small>
+                        </span>
+                    </div>
+
+                    <div class="visual-feature">
+                        <span class="feature-icon">02</span>
+                        <span>
+                            <strong>Track</strong>
+                            <small>Follow every update</small>
+                        </span>
+                    </div>
+
+                    <div class="visual-feature">
+                        <span class="feature-icon">03</span>
+                        <span>
+                            <strong>Improve</strong>
+                            <small>Build better communities</small>
+                        </span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="auth-intro-footer">
+
+            <div class="visual-footer">
                 BUILDING BETTER COMMUNITIES TOGETHER
             </div>
 
         </section>
 
 
-        <section class="auth-card">
+        <!-- RIGHT SIDE -->
 
-            <div class="auth-card-heading">
+        <section class="auth-panel">
 
-                <span class="eyebrow">
-                    WELCOME BACK
-                </span>
+            <div class="auth-card">
 
-                <h2>Sign in to CivicTrack</h2>
+                <!-- HEADING -->
 
-                <p>
-                    Enter your account details to continue.
-                </p>
+                <div class="auth-card-heading">
 
-            </div>
+                    <span class="eyebrow">
+                        ACCOUNT ACCESS
+                    </span>
 
+                    <h2 id="auth-heading">
+                        Welcome back.
+                    </h2>
 
-            <form
-                id="login-form"
-                method="post"
-                action="/templates/login.html"
-            >
-
-                <div class="auth-field">
-
-                    <label for="email">
-                        Email Address
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        autocomplete="username"
-                        required
-                    >
+                    <p id="auth-subheading">
+                        Sign in to continue to your CivicTrack account.
+                    </p>
 
                 </div>
 
 
+                <!-- ACCOUNT TYPE -->
+
                 <div class="auth-field">
 
-                    <label for="password">
-                        Password
+                    <label class="section-label">
+                        SELECT ACCOUNT TYPE
                     </label>
 
-                    <div class="password-wrapper">
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            autocomplete="current-password"
-                            required
-                        >
+                    <div class="role-selector">
 
                         <button
                             type="button"
-                            id="toggle-password"
-                            aria-label="Show password"
+                            class="role-option active"
+                            data-role="citizen"
+                            aria-pressed="true"
+                        >
+                            <span class="role-icon">◉</span>
+                            <span>
+                                <strong>Citizen</strong>
+                                <small>Public account</small>
+                            </span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="role-option"
+                            data-role="employee"
                             aria-pressed="false"
                         >
-                            Show
+                            <span class="role-icon">▣</span>
+                            <span>
+                                <strong>Employee</strong>
+                                <small>Staff account</small>
+                            </span>
                         </button>
 
                     </div>
@@ -149,58 +208,329 @@
                 </div>
 
 
+                <!-- LOGIN / REGISTER TABS -->
+
+                <div class="auth-tabs">
+
+                    <button
+                        type="button"
+                        class="auth-tab active"
+                        data-mode="login"
+                        aria-pressed="true"
+                    >
+                        Sign In
+                    </button>
+
+                    <button
+                        type="button"
+                        class="auth-tab"
+                        data-mode="register"
+                        aria-pressed="false"
+                    >
+                        Create Account
+                    </button>
+
+                </div>
+
+
+                <!-- AUTHENTICATION FORM -->
+
+                <form id="auth-form" novalidate>
+
+                    <!-- FULL NAME -->
+
+                    <div
+                        class="auth-field"
+                        id="full-name-field"
+                        hidden
+                    >
+
+                        <label for="full-name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="full-name"
+                            name="full_name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            maxlength="100"
+                        >
+
+                    </div>
+
+
+                    <!-- USERNAME -->
+
+                    <div
+                        class="auth-field"
+                        id="username-field"
+                        hidden
+                    >
+
+                        <label for="username">
+                            Choose Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Choose a username"
+                            autocomplete="username"
+                            minlength="3"
+                            maxlength="30"
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL / USERNAME LOGIN -->
+
+                    <div class="auth-field" id="identity-field">
+
+                        <label for="identity" id="identity-label">
+                            Email or Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="identity"
+                            name="identity"
+                            placeholder="Enter your email or username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMPLOYEE DEPARTMENT -->
+
+                    <div
+                        class="auth-field"
+                        id="department-field"
+                        hidden
+                    >
+
+                        <label for="department">
+                            Department
+                        </label>
+
+                        <select
+                            id="department"
+                            name="department"
+                        >
+                            <option value="">Select department</option>
+                            <option value="Public Works">Public Works</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Water Supply">Water Supply</option>
+                            <option value="Drainage">Drainage</option>
+                            <option value="Sanitation">Sanitation</option>
+                            <option value="General Services">General Services</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="auth-field">
+
+                        <div class="field-heading">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <button
+                                type="button"
+                                class="forgot-password"
+                                id="forgot-password"
+                            >
+                                Forgot password?
+                            </button>
+
+                        </div>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                minlength="8"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                data-target="password"
+                                aria-label="Show password"
+                                aria-pressed="false"
+                            >
+                                SHOW
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div
+                        class="auth-field"
+                        id="confirm-password-field"
+                        hidden
+                    >
+
+                        <label for="confirm-password">
+                            Confirm Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                name="confirm_password"
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                minlength="8"
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                data-target="confirm-password"
+                                aria-label="Show password"
+                                aria-pressed="false"
+                            >
+                                SHOW
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMPLOYEE APPROVAL NOTICE -->
+
+                    <div
+                        class="employee-notice"
+                        id="employee-notice"
+                        hidden
+                    >
+
+                        <span class="notice-icon">!</span>
+
+                        <p>
+                            Employee registrations require
+                            administrator approval before
+                            employee access is activated.
+                        </p>
+
+                    </div>
+
+
+                    <!-- SUBMIT BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                        id="auth-submit"
+                    >
+                        <span id="submit-text">Sign In</span>
+                        <span class="submit-arrow">→</span>
+                    </button>
+
+
+                    <!-- FORM MESSAGE -->
+
+                    <p
+                        id="auth-message"
+                        class="auth-message"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                </form>
+
+
+                <!-- SEPARATOR -->
+
+                <div class="auth-divider">
+                    <span></span>
+                    <small>OR CONTINUE WITH</small>
+                    <span></span>
+                </div>
+
+
+                <!-- GOOGLE LOGIN -->
+
                 <button
-                    type="submit"
-                    class="auth-submit"
+                    type="button"
+                    class="google-button"
+                    id="google-login"
                 >
-                    Sign In
-                    <span aria-hidden="true">→</span>
+
+                    <span class="google-mark">G</span>
+
+                    <span>Continue with Google</span>
+
                 </button>
 
 
-                <p
-                    id="login-message"
-                    class="auth-message"
-                    role="status"
-                    aria-live="polite"
-                ></p>
+                <!-- INFORMATION -->
+               
+               <!-- INFORMATION -->
 
-            </form>
+<div class="auth-demo-note">
+
+    <span class="demo-indicator"></span>
+
+    <p>
+        Email and password sign-in is available.
+        Google sign-in will be introduced in a
+        future development phase.
+    </p>
+
+</div>
+                
 
 
-            <div class="auth-demo-note">
-
-                <strong>Prototype notice</strong>
-
-                <p>
-                    This is a demonstration login interface.
-                    Account authentication has not been
-                    implemented yet. No credentials are sent
-                    or stored.
-                </p>
+                <a class="public-link" href="/">
+                    ← Continue to public homepage
+                </a>
 
             </div>
-
-
-            <a class="public-link" href="/">
-                Continue to public homepage
-            </a>
 
         </section>
 
     </main>
 
 
+    <!-- ======================================
+         FOOTER
+    ======================================= -->
+
     <footer class="auth-footer">
 
         <span>© 2026 CivicTrack</span>
 
-        <span>Public Service Portal · Version v2</span>
-      
+        <span>
+            Public Service Portal · V3 Development
+        </span>
+
+        <span>Built for better communities.</span>
 
     </footer>
 
 </body>
 
 </html>
-

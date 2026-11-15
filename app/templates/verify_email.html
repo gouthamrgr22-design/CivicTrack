@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080f1d">
+
+    <meta
+        name="description"
+        content="Verify your CivicTrack account email address."
+    >
+
+    <title>Verify Email | CivicTrack V3</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dark-theme.css">
+    <link rel="stylesheet" href="/static/css/auth.css">
+
+    <script src="/static/js/verify_email.js" defer></script>
+</head>
+
+<body class="auth-page">
+
+    <header class="auth-header">
+
+        <a href="/" class="brand">
+            <span class="brand-icon">C</span>
+
+            <span class="brand-text">
+                CivicTrack
+                <small>PUBLIC SERVICE PORTAL</small>
+            </span>
+        </a>
+
+        <div class="header-right">
+
+            <span class="system-status">
+                <span class="status-dot"></span>
+                CIVICTRACK V3
+            </span>
+
+            <a href="/" class="back-home">
+                ← Back to homepage
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="auth-layout">
+
+        <section class="auth-visual">
+
+            <div class="visual-content">
+
+                <span class="eyebrow">
+                    ACCOUNT SECURITY
+                </span>
+
+                <h1>
+                    One step.<br>
+                    <span>You're verified.</span>
+                </h1>
+
+                <p class="visual-description">
+                    Confirm your email address to activate
+                    your CivicTrack citizen account and
+                    participate in improving your community.
+                </p>
+
+            </div>
+
+            <div class="visual-footer">
+                BUILDING BETTER COMMUNITIES TOGETHER
+            </div>
+
+        </section>
+
+
+        <section class="auth-panel">
+
+            <div class="auth-card">
+
+                <div class="auth-card-heading">
+
+                    <span class="eyebrow">
+                        EMAIL VERIFICATION
+                    </span>
+
+                    <h2 id="verification-heading">
+                        Verify your email.
+                    </h2>
+
+                    <p id="verification-description">
+                        Confirm your email address to continue.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="verification-status"
+                    class="auth-message"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Checking your verification link...
+                </div>
+
+
+                <div
+                    id="verification-actions"
+                    hidden
+                >
+
+                    <a
+                        href="/templates/login.html"
+                        class="auth-submit"
+                    >
+                        Continue to Sign In
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
+

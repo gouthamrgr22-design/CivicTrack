@@ -82,6 +82,140 @@ def initialize_database():
             )
         """)
 
+        
+        # ==========================================
+        # V3 USER ACCOUNT MIGRATIONS
+        # ==========================================
+
+        existing_user_columns = {
+            row["name"]
+            for row in connection.execute(
+                "PRAGMA table_info(users)"
+            ).fetchall()
+        }
+
+        user_columns = {
+
+            "username": "TEXT",
+
+            "role": """
+                TEXT NOT NULL DEFAULT 'citizen'
+                CHECK(role IN ('citizen', 'employee', 'admin'))
+            """,
+
+            "account_status": """
+                TEXT NOT NULL DEFAULT 'active'
+                CHECK(account_status IN (
+                    'active',
+                    'pending_approval',
+                    'rejected',
+                    'suspended'
+                ))
+            """,
+
+            "email_verified": """
+                INTEGER NOT NULL DEFAULT 0
+                CHECK(email_verified IN (0, 1))
+            """,
+
+            "department": "TEXT",
+
+        }
+
+        for column_name, definition in user_columns.items():
+
+            if column_name not in existing_user_columns:
+
+                connection.execute(
+                    f"ALTER TABLE users ADD COLUMN "
+                    f"{column_name} {definition}"
+                )
+
+
+        # ==========================================
+        # GOOGLE OAUTH ACCOUNTS
+        # ==========================================
+
+        connection.execute("""
+            CREATE TABLE IF NOT EXISTS oauth_accounts (
+
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+                user_id INTEGER NOT NULL,
+
+                provider TEXT NOT NULL
+                    CHECK(provider IN ('google')),
+
+                provider_subject TEXT NOT NULL,
+
+                provider_email TEXT NOT NULL COLLATE NOCASE,
+
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+                UNIQUE(provider, provider_subject),
+
+                FOREIGN KEY (user_id)
+                    REFERENCES users(id)
+                    ON DELETE CASCADE
+
+            )
+        """)
+
+
+        # ==========================================
+        # AUTHENTICATION TOKENS
+        # ==========================================
+
+        connection.execute("""
+            CREATE TABLE IF NOT EXISTS auth_tokens (
+
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+                user_id INTEGER NOT NULL,
+
+                token_type TEXT NOT NULL
+                    CHECK(token_type IN (
+                        'email_verification',
+                        'password_reset'
+                    )),
+
+                token_hash TEXT NOT NULL UNIQUE,
+
+                expires_at TEXT NOT NULL,
+
+                used_at TEXT,
+
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+                FOREIGN KEY (user_id)
+                    REFERENCES users(id)
+                    ON DELETE CASCADE
+
+            )
+        """)
+
+
+        # ==========================================
+        # V3 ACCOUNT INDEXES
+        # ==========================================
+
+        connection.execute("""
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username
+            ON users(username COLLATE NOCASE)
+            WHERE username IS NOT NULL
+        """)
+
+        connection.execute("""
+            CREATE INDEX IF NOT EXISTS idx_oauth_accounts_user
+            ON oauth_accounts(user_id)
+        """)
+
+        connection.execute("""
+            CREATE INDEX IF NOT EXISTS idx_auth_tokens_user
+            ON auth_tokens(user_id, token_type, expires_at)
+        """)
+
+
         # ==========================================
         # AUTHENTICATION SESSIONS
         # ==========================================
