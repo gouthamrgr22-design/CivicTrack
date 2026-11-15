@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="CivicTrack administrator dashboard"
+    >
+
+    <title>CivicTrack | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="/static/css/dark-theme.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="admin-sidebar">
+
+            <a href="/" class="admin-brand">
+                <span class="admin-brand-icon">CT</span>
+
+                <span>
+                    <strong>CivicTrack</strong>
+                    <small>ADMINISTRATION</small>
+                </span>
+            </a>
+
+
+            <div class="sidebar-section-label">
+                WORKSPACE
+            </div>
+
+            <nav class="admin-navigation">
+
+                <a href="#overview" class="admin-nav-link active">
+                    <span>▦</span>
+                    Overview
+                </a>
+
+                <a href="#employees" class="admin-nav-link">
+                    <span>♙</span>
+                    Employee Management
+                    <span id="sidebar-pending-count" class="nav-count">0</span>
+                </a>
+
+                <a href="#complaints" class="admin-nav-link">
+                    <span>▤</span>
+                    Complaint Management
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-section-label">
+                SYSTEM
+            </div>
+
+            <nav class="admin-navigation">
+
+                <a href="#account" class="admin-nav-link">
+                    <span>⚙</span>
+                    Administrator Account
+                </a>
+
+            </nav>
+
+
+            <div class="admin-sidebar-bottom">
+
+                <div class="admin-profile">
+
+                    <div class="admin-avatar">A</div>
+
+                    <div class="admin-profile-details">
+                        <strong id="admin-name">Administrator</strong>
+                        <small>System Administrator</small>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="admin-logout"
+                    class="admin-logout"
+                >
+                    ↪ Sign Out
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="admin-main">
+
+            <!-- TOP BAR -->
+
+            <header class="admin-topbar">
+
+                <div>
+                    <div class="admin-breadcrumb">
+                        CivicTrack / Administration
+                    </div>
+
+                    <h1>Admin Dashboard</h1>
+                </div>
+
+                <div class="admin-topbar-actions">
+
+                    <span class="admin-role-badge">
+                        ● Administrator
+                    </span>
+
+                    <button
+                        type="button"
+                        id="admin-refresh"
+                        class="admin-refresh-button"
+                    >
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- NOTIFICATION -->
+
+            <div
+                id="admin-message"
+                class="admin-message"
+                role="status"
+                aria-live="polite"
+            >
+                Loading administrator dashboard...
+            </div>
+
+
+            <!-- OVERVIEW -->
+
+            <section id="overview" class="admin-section">
+
+                <div class="admin-welcome">
+
+                    <div>
+                        <span class="admin-eyebrow">
+                            CIVICTRACK CONTROL CENTER
+                        </span>
+
+                        <h2>
+                            Welcome back,
+                            <span id="welcome-admin-name">Administrator</span>
+                        </h2>
+
+                        <p>
+                            Monitor civic complaints, manage employees
+                            and oversee platform activity.
+                        </p>
+                    </div>
+
+                    <div class="admin-welcome-mark">
+                        CT
+                    </div>
+
+                </div>
+
+
+                <!-- EMPLOYEE STATISTICS -->
+
+                <div class="admin-section-heading">
+                    <div>
+                        <h2>Employee Statistics</h2>
+                        <p>Overview of registered employee accounts</p>
+                    </div>
+                </div>
+
+
+                <div class="admin-stats-grid">
+
+                    <article class="admin-stat-card">
+                        <span class="stat-label">Total Employees</span>
+                        <strong id="stat-employees-total">0</strong>
+                        <span class="stat-description">Registered employees</span>
+                    </article>
+
+                    <article class="admin-stat-card pending-card">
+                        <span class="stat-label">Pending Approval</span>
+                        <strong id="stat-employees-pending">0</strong>
+                        <span class="stat-description">Require your review</span>
+                    </article>
+
+                    <article class="admin-stat-card active-card">
+                        <span class="stat-label">Active Employees</span>
+                        <strong id="stat-employees-active">0</strong>
+                        <span class="stat-description">Approved employees</span>
+                    </article>
+
+                    <article class="admin-stat-card rejected-card">
+                        <span class="stat-label">Rejected Accounts</span>
+                        <strong id="stat-employees-rejected">0</strong>
+                        <span class="stat-description">Rejected registrations</span>
+                    </article>
+
+                </div>
+
+
+                <!-- COMPLAINT STATISTICS -->
+
+                <div class="admin-section-heading">
+                    <div>
+                        <h2>Complaint Statistics</h2>
+                        <p>Platform-wide complaint overview</p>
+                    </div>
+                </div>
+
+
+                <div class="admin-stats-grid">
+
+                    <article class="admin-stat-card">
+                        <span class="stat-label">Total Complaints</span>
+                        <strong id="stat-complaints-total">0</strong>
+                        <span class="stat-description">All submitted complaints</span>
+                    </article>
+
+                    <article class="admin-stat-card pending-card">
+                        <span class="stat-label">Pending Review</span>
+                        <strong id="stat-complaints-pending">0</strong>
+                        <span class="stat-description">Awaiting review</span>
+                    </article>
+
+                    <article class="admin-stat-card progress-card">
+                        <span class="stat-label">In Progress</span>
+                        <strong id="stat-complaints-progress">0</strong>
+                        <span class="stat-description">Currently being handled</span>
+                    </article>
+
+                    <article class="admin-stat-card active-card">
+                        <span class="stat-label">Resolved</span>
+                        <strong id="stat-complaints-resolved">0</strong>
+                        <span class="stat-description">Successfully resolved</span>
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- EMPLOYEE MANAGEMENT -->
+
+            <section id="employees" class="admin-section">
+
+                <div class="admin-section-heading">
+
+                    <div>
+                        <h2>Employee Management</h2>
+                        <p>
+                            Review employee registrations and manage
+                            account approvals.
+                        </p>
+                    </div>
+
+                    <select
+                        id="employee-filter"
+                        class="admin-filter"
+                        aria-label="Filter employees"
+                    >
+                        <option value="all">All Employees</option>
+                        <option value="pending_approval">Pending Approval</option>
+                        <option value="active">Active</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+
+                </div>
+
+
+                <div class="admin-table-container">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>EMPLOYEE</th>
+                                <th>DEPARTMENT</th>
+                                <th>EMAIL STATUS</th>
+                                <th>ACCOUNT STATUS</th>
+                                <th>REGISTERED</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="employee-table-body">
+
+                            <tr>
+                                <td colspan="6" class="table-empty">
+                                    Loading employees...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- COMPLAINT MANAGEMENT -->
+
+            <section id="complaints" class="admin-section">
+
+                <div class="admin-section-heading">
+
+                    <div>
+                        <h2>Recent Complaints</h2>
+                        <p>
+                            Latest civic complaints across all departments.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-table-container">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>REFERENCE</th>
+                                <th>COMPLAINT</th>
+                                <th>CATEGORY</th>
+                                <th>DEPARTMENT</th>
+                                <th>STATUS</th>
+                                <th>DATE</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="complaint-table-body">
+
+                            <tr>
+                                <td colspan="6" class="table-empty">
+                                    Loading complaints...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- ADMIN ACCOUNT -->
+
+            <section id="account" class="admin-section">
+
+                <div class="admin-section-heading">
+                    <div>
+                        <h2>Administrator Account</h2>
+                        <p>Your current administrator identity</p>
+                    </div>
+                </div>
+
+                <div class="admin-account-card">
+
+                    <div class="admin-account-avatar">
+                        <span>A</span>
+                    </div>
+
+                    <div>
+                        <h3 id="account-admin-name">Administrator</h3>
+                        <p id="account-admin-email">Loading account...</p>
+                        <span class="admin-role-badge">
+                            Verified Administrator
+                        </span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <footer class="admin-footer">
+                CivicTrack V3 · Administrator Control Panel
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="/static/js/admin.js"></script>
+
+</body>
+</html>
+
