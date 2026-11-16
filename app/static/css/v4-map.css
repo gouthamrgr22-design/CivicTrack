@@ -1,0 +1,228 @@
+
+/* =========================================================
+   CIVICTRACK V4 — NEON INTERACTIVE MAP
+   ========================================================= */
+
+.location-picker-group {
+    display: grid;
+    gap: 13px;
+}
+
+.location-map-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.location-map-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 11px 15px;
+
+    border: 1px solid rgba(100, 139, 255, 0.30);
+    border-radius: 12px;
+
+    background: rgba(41, 121, 255, 0.12);
+    color: #AFC5FF;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 250ms ease,
+        background 250ms ease,
+        border-color 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.location-map-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    background: rgba(41, 121, 255, 0.22);
+
+    border-color: #00F5FF;
+
+    box-shadow:
+        0 0 15px rgba(0, 245, 255, 0.12);
+}
+
+.location-map-button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+.location-map-button.secondary {
+    background: rgba(232, 121, 249, 0.08);
+    color: #E9B4FA;
+    border-color: rgba(232, 121, 249, 0.24);
+}
+
+.location-map-button.secondary:hover:not(:disabled) {
+    border-color: #E879F9;
+
+    box-shadow:
+        0 0 15px rgba(232, 121, 249, 0.13);
+}
+
+
+/* MAP CANVAS */
+
+#complaint-location-map {
+    position: relative;
+
+    width: 100%;
+    height: 360px;
+    min-height: 300px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(88, 227, 232, 0.28);
+    border-radius: 19px;
+
+    background: #10182B;
+
+    box-shadow:
+        0 0 22px rgba(41, 121, 255, 0.09),
+        inset 0 0 20px rgba(0, 245, 255, 0.035);
+
+    isolation: isolate;
+    z-index: 0;
+}
+
+#complaint-location-map .leaflet-container {
+    width: 100%;
+    height: 100%;
+
+    background: #10182B;
+
+    font-family: inherit;
+}
+
+
+/* LEAFLET ZOOM CONTROLS */
+
+#complaint-location-map .leaflet-bar {
+    border: 1px solid rgba(88, 227, 232, 0.25);
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+#complaint-location-map .leaflet-bar a {
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+
+    background: #111D30;
+    color: #58E3E8;
+
+    border-bottom-color: rgba(88, 227, 232, 0.16);
+
+    transition:
+        background 200ms ease,
+        color 200ms ease;
+}
+
+#complaint-location-map .leaflet-bar a:hover {
+    background: #1C2A46;
+    color: #FFFFFF;
+}
+
+
+/* ATTRIBUTION — KEEP VISIBLE */
+
+#complaint-location-map .leaflet-control-attribution {
+    padding: 4px 7px;
+
+    background: rgba(7, 11, 24, 0.88);
+
+    color: #B7C9E8;
+
+    font-size: 10px;
+}
+
+#complaint-location-map .leaflet-control-attribution a {
+    color: #58E3E8;
+}
+
+
+/* SELECTED LOCATION */
+
+#map-selection-status {
+    min-height: 20px;
+
+    margin: 0;
+
+    color: #58E3E8;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+#location[readonly] {
+    background: rgba(7, 13, 27, 0.9);
+    color: #AFC5FF;
+
+    cursor: default;
+
+    border-color: rgba(100, 139, 255, 0.25);
+}
+
+
+/* MAP POPUP */
+
+#complaint-location-map .leaflet-popup-content-wrapper,
+#complaint-location-map .leaflet-popup-tip {
+    background: #111D30;
+    color: #EAF2FF;
+}
+
+#complaint-location-map .leaflet-popup-content-wrapper {
+    border: 1px solid rgba(88, 227, 232, 0.22);
+    border-radius: 12px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    #complaint-location-map {
+        height: 310px;
+        min-height: 270px;
+
+        border-radius: 14px;
+    }
+
+    .location-map-toolbar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .location-map-button {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+}
+
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .location-map-button {
+        transition: none;
+    }
+
+}
+

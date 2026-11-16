@@ -1,61 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="CivicTrack - Report civic issues and improve your community."
-    >
+    <meta name="description" content="CivicTrack — Report civic issues, track complaints and help build better communities.">
+    <meta name="theme-color" content="#070B18">
+    <meta name="color-scheme" content="dark">
 
     <title>CivicTrack | Public Service Portal</title>
 
-    <!-- ======================================
-         STYLESHEETS
-    ======================================= -->
+    <!-- =========================================
+         CIVICTRACK V4 — STYLESHEETS
+    ========================================== -->
 
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/dark-theme.css">
     <link rel="stylesheet" href="/static/css/language.css">
-
-    <!-- NEW: Neon motion effects -->
     <link rel="stylesheet" href="/static/css/motion.css">
+    <link rel="stylesheet" href="/static/css/v4-theme.css">
 
+    <!-- Leaflet map stylesheet -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
 
-    <!-- ======================================
-         JAVASCRIPT
-    ======================================= -->
+    <link rel="stylesheet" href="/static/css/v4-map.css">
 
-    <!-- Translation engine -->
+    <!-- =========================================
+         CIVICTRACK V4 — JAVASCRIPT
+    ========================================== -->
+
     <script src="/static/js/i18n.js" defer></script>
-
-    <!-- Main application -->
     <script src="/static/js/app.js" defer></script>
-
-    <!-- NEW: Animated sparks and interactions -->
     <script src="/static/js/motion.js" defer></script>
+
+    <!-- Leaflet must load before the map engine -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+        defer
+    ></script>
+
+    <script src="/static/js/v4-map.js" defer></script>
 
 </head>
 
 <body>
 
-    <!-- ======================================
+    <!-- =========================================
          NAVIGATION
-    ======================================= -->
+    ========================================== -->
 
-    <header class="navbar">
+    <header class="navbar" id="site-header">
 
-        <!-- BRAND -->
+        <a href="#home" class="brand" aria-label="CivicTrack home">
 
-        <a href="#home" class="brand">
-
-            <span class="brand-icon">C</span>
+            <span class="brand-icon" aria-hidden="true">C</span>
 
             <span class="brand-text">
                 CivicTrack
@@ -64,57 +71,35 @@
 
         </a>
 
+        <nav class="navigation" aria-label="Main navigation">
 
-        <!-- NAVIGATION LINKS -->
-
-        <nav class="navigation">
-
-            <a
-                href="#home"
-                data-i18n="navigation.home"
-            >
+            <a href="#home" data-i18n="navigation.home">
                 Home
             </a>
 
-            <a
-                href="#dashboard"
-                data-i18n="navigation.dashboard"
-            >
+            <a href="#dashboard" data-i18n="navigation.dashboard">
                 Dashboard
             </a>
 
-            <a
-                href="#report"
-                data-i18n="navigation.report"
-            >
+            <a href="#report" data-i18n="navigation.report">
                 Report Issue
             </a>
 
-            <a
-                href="#complaints"
-                data-i18n="navigation.complaints"
-            >
+            <a href="#complaints" data-i18n="navigation.complaints">
                 Complaints
             </a>
 
-            <a
-                href="/templates/login.html"
-                data-i18n="navigation.login"
-            >
+            <a href="/templates/login.html" data-i18n="navigation.login">
                 Login
             </a>
 
         </nav>
 
-
         <!-- LANGUAGE SELECTOR -->
 
         <div class="language-control">
 
-            <label
-                for="language-selector"
-                data-i18n="language.label"
-            >
+            <label for="language-selector" data-i18n="language.label">
                 Language
             </label>
 
@@ -124,28 +109,14 @@
                 data-i18n-aria="language.selectLabel"
             >
 
-                <option value="en">
-                    English
-                </option>
-
-                <option value="kn" lang="kn">
-                    ಕನ್ನಡ
-                </option>
-
-                <option value="hi" lang="hi">
-                    हिन्दी
-                </option>
-
-                <option value="ta" lang="ta">
-                    தமிழ்
-                </option>
+                <option value="en">English</option>
+                <option value="kn" lang="kn">ಕನ್ನಡ</option>
+                <option value="hi" lang="hi">हिन्दी</option>
+                <option value="ta" lang="ta">தமிழ்</option>
 
             </select>
 
         </div>
-
-
-        <!-- GET STARTED -->
 
         <a
             href="#report"
@@ -158,29 +129,25 @@
     </header>
 
 
-    <!-- ======================================
-         MAIN CONTENT
-    ======================================= -->
+    <!-- =========================================
+         MAIN APPLICATION
+    ========================================== -->
 
     <main id="home" class="container">
 
-
-        <!-- ======================================
+        <!-- =====================================
              HERO SECTION
-        ======================================= -->
+        ====================================== -->
 
-        <section class="hero">
+        <section class="hero" aria-labelledby="hero-title">
 
             <div class="hero-content">
 
-                <span
-                    class="eyebrow"
-                    data-i18n="hero.eyebrow"
-                >
+                <span class="eyebrow" data-i18n="hero.eyebrow">
                     BUILDING BETTER COMMUNITIES
                 </span>
 
-                <h1>
+                <h1 id="hero-title">
 
                     <span data-i18n="hero.line1">
                         Your city.
@@ -206,10 +173,7 @@
                     attention to the problems that matter.
                 </p>
 
-                <a
-                    href="#report"
-                    class="primary-button"
-                >
+                <a href="#report" class="primary-button">
 
                     <span data-i18n="hero.button">
                         Report an Issue
@@ -220,9 +184,6 @@
                 </a>
 
             </div>
-
-
-            <!-- HERO VISUAL -->
 
             <div class="hero-visual" aria-hidden="true">
 
@@ -247,10 +208,9 @@
         </section>
 
 
-
-        <!-- ======================================
-             DASHBOARD STATISTICS
-        ======================================= -->
+        <!-- =====================================
+             COMMUNITY DASHBOARD
+        ====================================== -->
 
         <section id="dashboard" class="section">
 
@@ -258,10 +218,7 @@
 
                 <div>
 
-                    <span
-                        class="eyebrow"
-                        data-i18n="dashboard.eyebrow"
-                    >
+                    <span class="eyebrow" data-i18n="dashboard.eyebrow">
                         LIVE OVERVIEW
                     </span>
 
@@ -271,20 +228,15 @@
 
                 </div>
 
-                <span
-                    class="demo-label"
-                    data-i18n="dashboard.database"
-                >
+                <span class="demo-label" data-i18n="dashboard.database">
                     SQLITE DATABASE
                 </span>
 
             </div>
 
-
             <div class="statistics">
 
-
-                <!-- TOTAL COMPLAINTS -->
+                <!-- TOTAL -->
 
                 <article class="stat-card">
 
@@ -294,7 +246,7 @@
                             Total Complaints
                         </span>
 
-                        <span class="stat-icon blue">
+                        <span class="stat-icon blue" aria-hidden="true">
                             ▤
                         </span>
 
@@ -308,9 +260,7 @@
 
                 </article>
 
-
-
-                <!-- PENDING COMPLAINTS -->
+                <!-- PENDING -->
 
                 <article class="stat-card">
 
@@ -320,7 +270,7 @@
                             Pending
                         </span>
 
-                        <span class="stat-icon orange">
+                        <span class="stat-icon orange" aria-hidden="true">
                             ◷
                         </span>
 
@@ -334,9 +284,7 @@
 
                 </article>
 
-
-
-                <!-- RESOLVED COMPLAINTS -->
+                <!-- RESOLVED -->
 
                 <article class="stat-card">
 
@@ -346,7 +294,7 @@
                             Resolved
                         </span>
 
-                        <span class="stat-icon green">
+                        <span class="stat-icon green" aria-hidden="true">
                             ✓
                         </span>
 
@@ -365,19 +313,15 @@
         </section>
 
 
-
-        <!-- ======================================
-             REPORT ISSUE SECTION
-        ======================================= -->
+        <!-- =====================================
+             REPORT A CIVIC ISSUE
+        ====================================== -->
 
         <section id="report" class="content-grid">
 
             <article class="panel report-panel">
 
-                <span
-                    class="eyebrow"
-                    data-i18n="report.eyebrow"
-                >
+                <span class="eyebrow" data-i18n="report.eyebrow">
                     MAKE YOUR VOICE HEARD
                 </span>
 
@@ -385,26 +329,18 @@
                     Report a Civic Issue
                 </h2>
 
-                <p
-                    class="muted"
-                    data-i18n="report.introduction"
-                >
+                <p class="muted" data-i18n="report.introduction">
                     Provide the details below to report a
                     problem in your neighbourhood.
                 </p>
 
-
                 <form id="complaint-form">
-
 
                     <!-- ISSUE TITLE -->
 
                     <div class="form-group">
 
-                        <label
-                            for="title"
-                            data-i18n="report.issueTitle"
-                        >
+                        <label for="title" data-i18n="report.issueTitle">
                             Issue Title
                         </label>
 
@@ -415,29 +351,22 @@
                             placeholder="Example: Pothole near main road"
                             data-i18n-placeholder="report.issuePlaceholder"
                             maxlength="80"
+                            autocomplete="off"
                             required
                         >
 
                     </div>
 
 
-
                     <!-- ISSUE CATEGORY -->
 
                     <div class="form-group">
 
-                        <label
-                            for="category"
-                            data-i18n="report.category"
-                        >
+                        <label for="category" data-i18n="report.category">
                             Issue Category
                         </label>
 
-                        <select
-                            id="category"
-                            name="category"
-                            required
-                        >
+                        <select id="category" name="category" required>
 
                             <option
                                 value=""
@@ -446,52 +375,31 @@
                                 Select a category
                             </option>
 
-                            <option
-                                value="Road Damage"
-                                data-i18n="report.roadDamage"
-                            >
+                            <option value="Road Damage" data-i18n="report.roadDamage">
                                 Road Damage
                             </option>
 
-                            <option
-                                value="Streetlight"
-                                data-i18n="report.streetlight"
-                            >
+                            <option value="Streetlight" data-i18n="report.streetlight">
                                 Streetlight
                             </option>
 
-                            <option
-                                value="Water Leakage"
-                                data-i18n="report.waterLeakage"
-                            >
+                            <option value="Water Leakage" data-i18n="report.waterLeakage">
                                 Water Leakage
                             </option>
 
-                            <option
-                                value="Drainage"
-                                data-i18n="report.drainage"
-                            >
+                            <option value="Drainage" data-i18n="report.drainage">
                                 Drainage
                             </option>
 
-                            <option
-                                value="Women's Safety"
-                                data-i18n="report.womenSafety"
-                            >
+                            <option value="Women's Safety" data-i18n="report.womenSafety">
                                 Women's Safety
                             </option>
 
-                            <option
-                                value="Garbage"
-                                data-i18n="report.garbage"
-                            >
+                            <option value="Garbage" data-i18n="report.garbage">
                                 Garbage Collection
                             </option>
 
-                            <option
-                                value="Other"
-                                data-i18n="report.other"
-                            >
+                            <option value="Other" data-i18n="report.other">
                                 Other
                             </option>
 
@@ -500,40 +408,86 @@
                     </div>
 
 
+                    <!-- INTERACTIVE MAP LOCATION PICKER -->
 
-                    <!-- LOCATION -->
+                    <div class="form-group location-picker-group">
 
-                    <div class="form-group">
-
-                        <label
-                            for="location"
-                            data-i18n="report.location"
-                        >
-                            Location
+                        <label for="location" data-i18n="report.location">
+                            Select Problem Location
                         </label>
+
+                        <p class="muted">
+                            Select the exact location of the civic issue
+                            on the map. Drag the marker to adjust it.
+                        </p>
+
+                        <div class="location-map-toolbar">
+
+                            <button
+                                type="button"
+                                id="map-use-current-location"
+                                class="location-map-button"
+                            >
+                                <span aria-hidden="true">◎</span>
+                                Use my current location
+                            </button>
+
+                            <button
+                                type="button"
+                                id="map-clear-selection"
+                                class="location-map-button secondary"
+                            >
+                                Clear selection
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="complaint-location-map"
+                            role="application"
+                            aria-label="Select the location of the civic problem"
+                        ></div>
+
+                        <p
+                            id="map-selection-status"
+                            role="status"
+                            aria-live="polite"
+                        >
+                            No location selected. Tap the map to choose a location.
+                        </p>
 
                         <input
                             type="text"
                             id="location"
                             name="location"
-                            placeholder="Street, area or landmark"
+                            placeholder="Choose a location on the map"
                             data-i18n-placeholder="report.locationPlaceholder"
                             maxlength="120"
+                            readonly
                             required
+                            aria-describedby="map-selection-status"
+                        >
+
+                        <input
+                            type="hidden"
+                            id="latitude"
+                            name="latitude"
+                        >
+
+                        <input
+                            type="hidden"
+                            id="longitude"
+                            name="longitude"
                         >
 
                     </div>
-
 
 
                     <!-- DESCRIPTION -->
 
                     <div class="form-group">
 
-                        <label
-                            for="description"
-                            data-i18n="report.description"
-                        >
+                        <label for="description" data-i18n="report.description">
                             Description
                         </label>
 
@@ -550,13 +504,9 @@
                     </div>
 
 
+                    <!-- SUBMIT -->
 
-                    <!-- SUBMIT BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="submit-button"
-                    >
+                    <button type="submit" class="submit-button">
 
                         <span data-i18n="report.submit">
                             Submit Complaint
@@ -566,8 +516,7 @@
 
                     </button>
 
-
-                    <!-- FORM MESSAGE -->
+                    <!-- FORM FEEDBACK -->
 
                     <p
                         id="form-message"
@@ -581,17 +530,13 @@
             </article>
 
 
-
-            <!-- ======================================
+            <!-- =================================
                  HOW CIVICTRACK WORKS
-            ======================================= -->
+            ================================== -->
 
             <aside class="panel process-panel">
 
-                <span
-                    class="eyebrow"
-                    data-i18n="process.eyebrow"
-                >
+                <span class="eyebrow" data-i18n="process.eyebrow">
                     OUR PROCESS
                 </span>
 
@@ -599,22 +544,16 @@
                     How CivicTrack Works
                 </h2>
 
-                <p
-                    class="muted"
-                    data-i18n="process.description"
-                >
+                <p class="muted" data-i18n="process.description">
                     Making civic participation simple and transparent.
                 </p>
-
 
 
                 <!-- STEP 1 -->
 
                 <div class="process-step">
 
-                    <span class="step-number">
-                        01
-                    </span>
+                    <span class="step-number">01</span>
 
                     <div>
 
@@ -632,14 +571,11 @@
                 </div>
 
 
-
                 <!-- STEP 2 -->
 
                 <div class="process-step">
 
-                    <span class="step-number">
-                        02
-                    </span>
+                    <span class="step-number">02</span>
 
                     <div>
 
@@ -657,14 +593,11 @@
                 </div>
 
 
-
                 <!-- STEP 3 -->
 
                 <div class="process-step">
 
-                    <span class="step-number">
-                        03
-                    </span>
+                    <span class="step-number">03</span>
 
                     <div>
 
@@ -682,20 +615,19 @@
                 </div>
 
 
-
-                <!-- PROTOTYPE NOTICE -->
+                <!-- INFORMATION NOTICE -->
 
                 <div class="notice">
 
                     <strong data-i18n="process.noticeTitle">
-                        Prototype Information
+                        Platform Information
                     </strong>
 
-                    <p data-i18n="process.noticeDescription">
-                        Complaints submitted through this prototype are
-                        stored in the CivicTrack SQLite database on
-                        this server. Citizen and employee accounts
-                        are not yet connected to real authentication.
+                    <p>
+                        CivicTrack uses a SQLite database to store
+                        complaint information. Account registration,
+                        authentication and employee approval follow
+                        the platform's configured access rules.
                     </p>
 
                 </div>
@@ -705,10 +637,9 @@
         </section>
 
 
-
-        <!-- ======================================
-             COMPLAINT TRANSPARENCY TABLE
-        ======================================= -->
+        <!-- =====================================
+             COMPLAINT TRANSPARENCY
+        ====================================== -->
 
         <section
             id="complaints"
@@ -719,10 +650,7 @@
 
                 <div>
 
-                    <span
-                        class="eyebrow"
-                        data-i18n="complaints.eyebrow"
-                    >
+                    <span class="eyebrow" data-i18n="complaints.eyebrow">
                         TRANSPARENCY
                     </span>
 
@@ -730,18 +658,14 @@
                         Recent Complaints
                     </h2>
 
-                    <p
-                        class="muted"
-                        data-i18n="complaints.description"
-                    >
+                    <p class="muted" data-i18n="complaints.description">
                         View complaint decisions and follow their progress.
                     </p>
 
                 </div>
 
 
-
-                <!-- COMPLAINT STATUS FILTER -->
+                <!-- STATUS FILTER -->
 
                 <select
                     id="status-filter"
@@ -750,52 +674,33 @@
                     data-i18n-aria="complaints.filterLabel"
                 >
 
-                    <option
-                        value="All"
-                        data-i18n="complaints.filterAll"
-                    >
+                    <option value="All" data-i18n="complaints.filterAll">
                         All Complaints
                     </option>
 
-                    <option
-                        value="Pending Review"
-                        data-i18n="complaints.filterPending"
-                    >
+                    <option value="Pending Review" data-i18n="complaints.filterPending">
                         Pending Review
                     </option>
 
-                    <option
-                        value="Approved"
-                        data-i18n="complaints.filterApproved"
-                    >
+                    <option value="Approved" data-i18n="complaints.filterApproved">
                         Approved
                     </option>
 
-                    <option
-                        value="In Progress"
-                        data-i18n="complaints.filterProgress"
-                    >
+                    <option value="In Progress" data-i18n="complaints.filterProgress">
                         In Progress
                     </option>
 
-                    <option
-                        value="Rejected"
-                        data-i18n="complaints.filterRejected"
-                    >
+                    <option value="Rejected" data-i18n="complaints.filterRejected">
                         Rejected
                     </option>
 
-                    <option
-                        value="Resolved"
-                        data-i18n="complaints.filterResolved"
-                    >
+                    <option value="Resolved" data-i18n="complaints.filterResolved">
                         Resolved
                     </option>
 
                 </select>
 
             </div>
-
 
 
             <!-- COMPLAINT TABLE -->
@@ -836,9 +741,7 @@
 
                     </thead>
 
-
-                    <tbody id="complaint-list">
-                    </tbody>
+                    <tbody id="complaint-list"></tbody>
 
                 </table>
 
@@ -849,10 +752,9 @@
     </main>
 
 
-
-    <!-- ======================================
+    <!-- =========================================
          FOOTER
-    ======================================= -->
+    ========================================== -->
 
     <footer class="footer">
 
@@ -866,12 +768,11 @@
 
         </div>
 
-        <span data-i18n="footer.version">
-            Version v2 · SQLite-backed prototype
+        <span>
+            CivicTrack V4 · Visual Revolution
         </span>
 
     </footer>
 
 </body>
-
 </html>
