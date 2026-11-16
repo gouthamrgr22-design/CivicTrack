@@ -166,6 +166,22 @@ def initialize_database():
         # AUTHENTICATION TOKENS
         # ==========================================
 
+        # ==========================================
+        # GOOGLE LOGIN NONCES
+        # One-time, short-lived browser challenge.
+        # ==========================================
+
+        connection.execute("""
+            CREATE TABLE IF NOT EXISTS google_login_nonces (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nonce_hash TEXT NOT NULL UNIQUE,
+                expires_at TEXT NOT NULL,
+                used_at TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+
         connection.execute("""
             CREATE TABLE IF NOT EXISTS auth_tokens (
 
