@@ -36,7 +36,6 @@ const forgotPassword = document.querySelector("#forgot-password");
 
 const submitButton = document.querySelector("#auth-submit");
 const submitText = document.querySelector("#submit-text");
-const googleButton = document.querySelector("#google-login");
 
 
 /* =====================================================
@@ -663,140 +662,6 @@ authForm.addEventListener("submit", async event => {
 
 
 /* =====================================================
-   GOOGLE IDENTITY SERVICES
-   Server-verified ID token + nonce-bound same-origin session.
-   ===================================================== */
-
-async function handleGoogleCredential(credentialResponse) {
-
-    if (isSubmitting) return;
-
-    if (
-        selectedMode === "register" &&
-        selectedRole === "employee" &&
-        !departmentInput.value
-    ) {
-        showMessage("Select your department before requesting employee access.");
-        departmentInput.focus();
-        return;
-    }
-
-    if (!credentialResponse || !credentialResponse.credential) {
-        showMessage("Google did not return an identity token. Please try again.");
-        return;
-    }
-
-    setSubmitting(true);
-    googleButton.setAttribute("aria-busy", "true");
-
-    try {
-        const response = await fetch("/api/auth/google", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "same-origin",
-            body: JSON.stringify({
-                credential: credentialResponse.credential,
-                mode: selectedMode,
-                role: selectedRole,
-                department: selectedRole === "employee"
-                    ? departmentInput.value
-                    : ""
-            })
-        });
-
-        const result = await readAPIResponse(response);
-
-        if (result.requires_email_verification) {
-            showMessage(
-                result.message || "Check your inbox for a verification link.",
-                "success"
-            );
-            return;
-        }
-
-        if (result.pending_approval) {
-            showMessage(
-                result.message || "Your employee account is awaiting administrator approval.",
-                "success"
-            );
-            return;
-        }
-
-        if (!response.ok) {
-            showMessage(result.error || "Google sign-in failed. Please try again.");
-            return;
-        }
-
-        redirectAuthenticatedUser(result.user);
-
-    } catch (error) {
-        console.error("CivicTrack Google sign-in error:", error);
-        showMessage(error.message || "Google sign-in could not reach CivicTrack.");
-    } finally {
-        googleButton.removeAttribute("aria-busy");
-        setSubmitting(false);
-    }
-}
-
-function loadGoogleIdentityServices() {
-
-    fetch("/api/auth/google-config", {
-        credentials: "same-origin",
-        cache: "no-store"
-    })
-    .then(readAPIResponse)
-    .then(config => {
-        if (!config.client_id || !config.nonce) {
-            throw new Error("Google Sign-In is not configured. Ask the administrator to set GOOGLE_CLIENT_ID.");
-        }
-
-        const initialize = () => {
-            if (!window.google || !window.google.accounts || !window.google.accounts.id) {
-                showMessage("Google Sign-In could not load. Check your connection or content blocker.");
-                return;
-            }
-
-            window.google.accounts.id.initialize({
-                client_id: config.client_id,
-                nonce: config.nonce,
-                callback: handleGoogleCredential,
-                auto_select: false,
-                cancel_on_tap_outside: true
-            });
-
-            googleButton.replaceChildren();
-            window.google.accounts.id.renderButton(googleButton, {
-                type: "standard",
-                theme: "outline",
-                size: "large",
-                shape: "rectangular",
-                text: "continue_with",
-                width: Math.min(360, googleButton.clientWidth || 360),
-                logo_alignment: "left"
-            });
-        };
-
-        if (window.google && window.google.accounts && window.google.accounts.id) {
-            initialize();
-            return;
-        }
-
-        const script = document.createElement("script");
-        script.src = "https://accounts.google.com/gsi/client";
-        script.async = true;
-        script.defer = true;
-        script.onload = initialize;
-        script.onerror = () => showMessage("Google Sign-In could not load. Check your connection.");
-        document.head.appendChild(script);
-    })
-    .catch(error => {
-        console.error("CivicTrack Google configuration error:", error);
-        showMessage(error.message || "Google Sign-In is unavailable. Check server configuration.", "info");
-    });
-}
-
-
-/* =====================================================
    RESEND EMAIL VERIFICATION
    ===================================================== */
 
@@ -855,5 +720,4 @@ forgotPassword.addEventListener("click", () => {
 
 updateInterface();
 
-loadGoogleIdentityServices();
 
