@@ -9,7 +9,7 @@ Handles:
 - Session creation and validation
 - Session revocation
 
-Google OAuth and email verification are separate integrations.
+Email verification is handled separately from account authentication.
 """
 
 import hashlib
@@ -597,47 +597,6 @@ def verify_email_token(raw_token):
             (token["user_id"],),
         )
 
-        return result.rowcount == 1
-
-
-def create_google_login_nonce():
-    """Create a five-minute, one-use Google sign-in nonce."""
-    raw_nonce = secrets.token_urlsafe(32)
-    nonce_hash = hashlib.sha256(raw_nonce.encode("utf-8")).hexdigest()
-    expires_at = (
-        datetime.now(timezone.utc) + timedelta(minutes=5)
-    ).strftime("%Y-%m-%d %H:%M:%S")
-
-    with get_connection() as connection:
-        connection.execute(
-            "DELETE FROM google_login_nonces "
-            "WHERE expires_at <= CURRENT_TIMESTAMP OR used_at IS NOT NULL"
-        )
-        connection.execute(
-            "INSERT INTO google_login_nonces (nonce_hash, expires_at) "
-            "VALUES (?, ?)",
-            (nonce_hash, expires_at),
-        )
-
-    return raw_nonce
-
-
-def consume_google_login_nonce(raw_nonce):
-    """Atomically consume a valid Google nonce exactly once."""
-    if not isinstance(raw_nonce, str) or not 20 <= len(raw_nonce) <= 128:
-        return False
-
-    nonce_hash = hashlib.sha256(raw_nonce.encode("utf-8")).hexdigest()
-    with get_connection() as connection:
-        connection.execute("BEGIN IMMEDIATE")
-        result = connection.execute(
-            """UPDATE google_login_nonces
-               SET used_at = CURRENT_TIMESTAMP
-               WHERE nonce_hash = ?
-                 AND used_at IS NULL
-                 AND expires_at > CURRENT_TIMESTAMP""",
-            (nonce_hash,),
-        )
         return result.rowcount == 1
 
 
