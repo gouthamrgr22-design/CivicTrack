@@ -33,23 +33,12 @@ from services.auth_service import (
     revoke_session,
     create_email_verification_token,
     verify_email_token,
-    create_google_login_nonce,
-    consume_google_login_nonce,
     get_user_for_verification_resend,
     can_resend_verification_email,
 )
 
 from services.email_service import (
     send_verification_email,
-)
-
-from services.google_service import (
-    get_google_client_id,
-    verify_google_id_token,
-)
-
-from services.google_account_service import (
-    create_or_link_google_user,
 )
 
 from services.complaint_service import (
@@ -199,35 +188,6 @@ class CivicTrackHandler(SimpleHTTPRequestHandler):
         # Enable Secure cookies when deployed over HTTPS.
         if os.environ.get("CIVICTRACK_HTTPS") == "1":
 
-            morsel["secure"] = True
-
-        return cookie.output(header="").strip()
-
-
-    def get_google_nonce_cookie(self):
-
-        cookie = SimpleCookie()
-
-        try:
-            cookie.load(self.headers.get("Cookie", ""))
-        except Exception:
-            return None
-
-        morsel = cookie.get("civictrack_google_nonce")
-        return morsel.value if morsel else None
-
-
-    def build_google_nonce_cookie(self, nonce, max_age=300):
-
-        cookie = SimpleCookie()
-        cookie["civictrack_google_nonce"] = nonce
-        morsel = cookie["civictrack_google_nonce"]
-        morsel["httponly"] = True
-        morsel["samesite"] = "Strict"
-        morsel["path"] = "/"
-        morsel["max-age"] = str(max_age)
-
-        if os.environ.get("CIVICTRACK_HTTPS") == "1":
             morsel["secure"] = True
 
         return cookie.output(header="").strip()
@@ -385,32 +345,6 @@ class CivicTrackHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
 
         path = urlsplit(self.path).path
-
-
-        # ======================================
-        # GOOGLE IDENTITY SERVICES CONFIGURATION
-        # Issue a short-lived nonce bound to this browser via HttpOnly cookie.
-        # ======================================
-
-        if path == "/api/auth/google-config":
-
-            try:
-                client_id = get_google_client_id()
-                if not client_id:
-                    self.send_json(503, {"error": "Google Sign-In is not configured."})
-                    return
-
-                nonce = create_google_login_nonce()
-                self.send_json(
-                    200,
-                    {"client_id": client_id, "nonce": nonce},
-                    headers={"Set-Cookie": self.build_google_nonce_cookie(nonce)},
-                )
-            except Exception:
-                self.log_error("Google configuration error")
-                self.send_json(503, {"error": "Google Sign-In is temporarily unavailable."})
-
-            return
 
 
         # ======================================
@@ -861,103 +795,6 @@ class CivicTrackHandler(SimpleHTTPRequestHandler):
                 400,
                 {"error": str(error)},
             )
-
-            return
-
-
-        # ======================================
-        # GOOGLE SIGN-IN / GOOGLE REGISTRATION
-        # ======================================
-
-        if path == "/api/auth/google":
-
-            if not self.is_same_origin_request():
-                self.send_json(403, {"error": "Cross-origin sign-in request rejected."})
-                return
-
-            nonce = self.get_google_nonce_cookie()
-
-            try:
-                identity = verify_google_id_token(
-                    data.get("credential"),
-                    nonce,
-                )
-
-                if not consume_google_login_nonce(nonce):
-                    self.send_json(403, {"error": "Google sign-in session expired. Reload and try again."})
-                    return
-
-                user = create_or_link_google_user(
-                    identity,
-                    data.get("mode"),
-                    data.get("role"),
-                    data.get("department"),
-                )
-
-                if not user["email_verified"]:
-                    # Non-Gmail, non-Workspace Google addresses still require
-                    # the traditional single-use Resend link.
-                    if can_resend_verification_email(user["id"]):
-                        verification_token = create_email_verification_token(user["id"])
-                        send_verification_email(
-                            user["email"],
-                            user["full_name"],
-                            verification_token,
-                        )
-
-                    self.send_json(
-                        202,
-                        {
-                            "requires_email_verification": True,
-                            "message": "Check your inbox for a CivicTrack verification link before signing in.",
-                        },
-                        headers={"Set-Cookie": self.build_google_nonce_cookie("", 0)},
-                    )
-                    return
-
-                if user["account_status"] == "pending_approval":
-                    self.send_json(
-                        202,
-                        {
-                            "pending_approval": True,
-                            "message": "Your email is verified. Your employee account is waiting for administrator approval.",
-                        },
-                        headers={"Set-Cookie": self.build_google_nonce_cookie("", 0)},
-                    )
-                    return
-
-                if user["account_status"] != "active":
-                    self.send_json(
-                        403,
-                        {"error": "This account is not currently active."},
-                        headers={"Set-Cookie": self.build_google_nonce_cookie("", 0)},
-                    )
-                    return
-
-                session_token = create_session(user["id"])
-                self.send_json(
-                    200,
-                    {"message": "Google sign-in successful.", "user": user},
-                    headers={
-                        "Set-Cookie": [
-                            self.build_session_cookie(session_token),
-                            self.build_google_nonce_cookie("", 0),
-                        ]
-                    },
-                )
-
-            except PermissionError as error:
-                self.send_json(403, {"error": str(error)})
-            except LookupError as error:
-                self.send_json(404, {"error": str(error)})
-            except ValueError as error:
-                self.send_json(401, {"error": str(error)})
-            except RuntimeError:
-                self.log_error("Google sign-in service error")
-                self.send_json(503, {"error": "Google sign-in is temporarily unavailable."})
-            except Exception:
-                self.log_error("Google sign-in error")
-                self.send_json(500, {"error": "Could not complete Google sign-in."})
 
             return
 
