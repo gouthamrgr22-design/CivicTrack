@@ -133,54 +133,8 @@ def initialize_database():
 
 
         # ==========================================
-        # GOOGLE OAUTH ACCOUNTS
-        # ==========================================
-
-        connection.execute("""
-            CREATE TABLE IF NOT EXISTS oauth_accounts (
-
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-                user_id INTEGER NOT NULL,
-
-                provider TEXT NOT NULL
-                    CHECK(provider IN ('google')),
-
-                provider_subject TEXT NOT NULL,
-
-                provider_email TEXT NOT NULL COLLATE NOCASE,
-
-                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-                UNIQUE(provider, provider_subject),
-
-                FOREIGN KEY (user_id)
-                    REFERENCES users(id)
-                    ON DELETE CASCADE
-
-            )
-        """)
-
-
-        # ==========================================
         # AUTHENTICATION TOKENS
         # ==========================================
-
-        # ==========================================
-        # GOOGLE LOGIN NONCES
-        # One-time, short-lived browser challenge.
-        # ==========================================
-
-        connection.execute("""
-            CREATE TABLE IF NOT EXISTS google_login_nonces (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nonce_hash TEXT NOT NULL UNIQUE,
-                expires_at TEXT NOT NULL,
-                used_at TEXT,
-                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-            )
-        """)
-
 
         connection.execute("""
             CREATE TABLE IF NOT EXISTS auth_tokens (
@@ -219,11 +173,6 @@ def initialize_database():
             CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username
             ON users(username COLLATE NOCASE)
             WHERE username IS NOT NULL
-        """)
-
-        connection.execute("""
-            CREATE INDEX IF NOT EXISTS idx_oauth_accounts_user
-            ON oauth_accounts(user_id)
         """)
 
         connection.execute("""
